@@ -26,7 +26,9 @@ MAPTILERAPIKEY=nki...
 -   [x] Scaffold server
 -   [x] Scaffold UI
 -   [x] Full screen map
+-   [ ] Implement correct type ahead functionality
 -   [ ] From and to search
 -   [ ] Displaying route on the map
+-   [ ] Suggest walking/cycling
 
 ## Tech stack
