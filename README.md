@@ -25,7 +25,7 @@ MAPTILERAPIKEY=nki...
 
 -   [x] Scaffold server
 -   [x] Scaffold UI
--   [ ] Full screen map
+-   [x] Full screen map
 -   [ ] From and to search
 -   [ ] Displaying route on the map
 

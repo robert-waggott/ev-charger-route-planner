@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 export interface SidebarProps {}
 
