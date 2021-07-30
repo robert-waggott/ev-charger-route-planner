@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import { FullScreenMap } from "./components/full-screen-map";
+import { Sidebar } from "./components/sidebar";
 
 function App() {
     return (
         <div className="App">
+            <Sidebar />
             <FullScreenMap></FullScreenMap>
         </div>
     );

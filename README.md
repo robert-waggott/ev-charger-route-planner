@@ -4,7 +4,12 @@ In a similar fashion to my previous [repo/project](https://github.com/robert-wag
 
 The idea of this project is to build a route planning engine that will also allow the user to work out where and when to stop to charge their Electric/plug in hybrid vehicle. Whereas the previous repo/project had little practical use my thinking with this is that it will have some use, even just for myself.
 
-## Config.env
+## Getting started
+
+1. `cd` to `/server` and run `npm run start:dev`
+1. `cd` to `/ui` and run `npm start`
+
+### Config.env
 
 A config.env should be created in the root of the `/server` directory. It should contain the following settings -
 
