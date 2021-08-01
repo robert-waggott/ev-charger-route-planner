@@ -1,4 +1,10 @@
-export interface SearchResult {
+export interface LocationSearchResponse {
+    attribution: string;
+    results: LocationSearchResult[];
+}
+
+export interface LocationSearchResult {
     name: string;
-    address?: string;
+    description?: string;
+    relevance: number;
 }
