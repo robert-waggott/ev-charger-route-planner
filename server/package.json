@@ -21,10 +21,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "axios": "^0.21.1",
     "dotenv": "^10.0.0",
+    "mapbox": "^1.0.0-beta10",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -35,6 +38,8 @@
     "@nestjs/testing": "^8.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^26.0.24",
+    "@types/mapbox": "^1.6.42",
+    "@types/mapbox__mapbox-sdk": "^0.13.2",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.2",

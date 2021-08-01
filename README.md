@@ -16,10 +16,12 @@ A config.env should be created in the root of the `/server` directory. It should
 ```
 PORT=3001
 MAPTILERAPIKEY=nki...
+MAPBOXAPIKEY=pk.eyJ1...
 ```
 
 -   `PORT` - The port that the server should run on. Should be set to 3001.
 -   `MAPTILERAPIKEY` - An API key from [maptiler.com](https://cloud.maptiler.com/).
+-   `MAPBOXAPIKEY` - An API key from [mapbox.com](https://account.mapbox.com/).
 
 ## Todo
 
