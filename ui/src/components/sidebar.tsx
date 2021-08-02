@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch, FaInfoCircle } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Form from "react-bootstrap/Form";
-import { Container, Button, InputGroup, OverlayTrigger, Popover } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import { SearchInput } from "./search-input";
+import { AttributedSearchInput } from "./search-input";
 
 export interface SidebarProps {}
 
@@ -26,13 +26,6 @@ const StyledButtonContainer = styled(Form.Group)`
     text-align: right;
     margin-top: 20px;
 `;
-
-const AttributionPopover = (
-    <Popover id="popover-basic">
-        <Popover.Header as="h3">Attribution</Popover.Header>
-        <Popover.Body></Popover.Body>
-    </Popover>
-);
 
 export const Sidebar = (props: SidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
@@ -55,33 +48,13 @@ export const Sidebar = (props: SidebarProps) => {
                             <Form.Group className="mb-3" controlId="from">
                                 <Form.Label>From</Form.Label>
 
-                                {/* todo - refactor into a separate control */}
-                                <InputGroup>
-                                    <SearchInput id="from" />
-                                    <InputGroup.Text id="basic-addon1">
-                                        <OverlayTrigger trigger="click" placement="right" overlay={AttributionPopover}>
-                                            <Button>
-                                                <FaInfoCircle />
-                                            </Button>
-                                        </OverlayTrigger>
-                                    </InputGroup.Text>
-                                </InputGroup>
+                                <AttributedSearchInput id="from" />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="to">
                                 <Form.Label>To</Form.Label>
 
-                                {/* todo - refactor into a separate control */}
-                                <InputGroup>
-                                    <SearchInput id="to" />
-                                    <InputGroup.Text id="basic-addon1">
-                                        <OverlayTrigger trigger="click" placement="right" overlay={AttributionPopover}>
-                                            <Button>
-                                                <FaInfoCircle />
-                                            </Button>
-                                        </OverlayTrigger>
-                                    </InputGroup.Text>
-                                </InputGroup>
+                                <AttributedSearchInput id="to" />
                             </Form.Group>
 
                             <Form.Group>
