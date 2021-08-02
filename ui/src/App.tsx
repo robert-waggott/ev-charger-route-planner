@@ -7,7 +7,7 @@ function App() {
     return (
         <div className="App">
             <Sidebar />
-            <FullScreenMap></FullScreenMap>
+            <FullScreenMap />
         </div>
     );
 }
