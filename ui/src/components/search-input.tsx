@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AsyncTypeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
-import { SearchService } from "../services/search-service";
+import { LocationSearchService } from "../services/location-search-service";
 import { LocationSearchResult, NullableLocationSearchResult } from "../interfaces/search-result";
 import { Button, InputGroup, OverlayTrigger, Popover } from "react-bootstrap";
 import { FaInfoCircle } from "react-icons/fa";
@@ -54,7 +54,7 @@ export const SearchInput = (props: SearchInputProps) => {
     const onSearch = async (query: string) => {
         setIsLoading(true);
 
-        const locationSearchResponse = await new SearchService().performSearch(query);
+        const locationSearchResponse = await new LocationSearchService().performSearch(query);
 
         setIsLoading(false);
         setSearchResults(locationSearchResponse.results);

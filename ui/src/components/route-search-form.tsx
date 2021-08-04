@@ -7,7 +7,9 @@ import { Formik, FormikHelpers } from "formik";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
 import { RouteContext } from "../App";
 
-interface RouteSearchFormProps {}
+interface RouteSearchFormProps {
+    onSearchSubmitted: () => unknown;
+}
 
 interface ErrorContainerProps {
     error?: string;
@@ -44,10 +46,6 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
         excludeFerries: false
     });
 
-    React.useEffect(() => {
-        console.log("updated route search", routeSearch);
-    }, [routeSearch]);
-
     const validate = (values: RouteSearch) => {
         const errors: {
             [key: string]: string;
@@ -67,8 +65,11 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
 
         return errors;
     };
-    const onSubmit = (values: RouteSearch, { setSubmitting }: FormikHelpers<RouteSearch>) => {
+    const onSubmit = async (values: RouteSearch, { setSubmitting }: FormikHelpers<RouteSearch>) => {
         setRouteSearch(values);
+
+        props.onSearchSubmitted();
+
         // todo: perform the search or use a reducer to do so?
         setSubmitting(false);
     };

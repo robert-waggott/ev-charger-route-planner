@@ -35,7 +35,7 @@ export const Sidebar = (props: SidebarProps) => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Container fluid>
-                        <RouteSearchForm />
+                        <RouteSearchForm onSearchSubmitted={() => setExpanded(false)} />
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>
