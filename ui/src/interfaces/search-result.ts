@@ -8,3 +8,5 @@ export interface LocationSearchResult {
     description?: string;
     relevance: number;
 }
+
+export type NullableLocationSearchResult = LocationSearchResult | null;

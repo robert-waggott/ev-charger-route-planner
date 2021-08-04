@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { AsyncTypeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
 import { SearchService } from "../services/search-service";
-import { LocationSearchResult } from "../interfaces/search-result";
+import { LocationSearchResult, NullableLocationSearchResult } from "../interfaces/search-result";
 import { Button, InputGroup, OverlayTrigger, Popover } from "react-bootstrap";
 import { FaInfoCircle } from "react-icons/fa";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
 export interface SearchInputProps {
     id: string;
+    onChange: (locationSearchResult: NullableLocationSearchResult) => unknown;
 }
 
 const StyledAddressSpan = styled.span`
@@ -30,7 +32,7 @@ const AttributionPopover = (
 export const AttributedSearchInput = (props: SearchInputProps) => {
     return (
         <InputGroup>
-            <SearchInput id={props.id} />
+            <SearchInput id={props.id} onChange={props.onChange} />
             <InputGroup.Text id={`${props.id}-addon1`}>
                 {/* todo - refactor into a tooltip ? */}
                 <OverlayTrigger trigger="click" placement="right" overlay={AttributionPopover}>
@@ -62,12 +64,12 @@ export const SearchInput = (props: SearchInputProps) => {
     const onChange = (selectedItems: LocationSearchResult[]) => {
         if (selectedItems.length === 0) {
             setSelectedItem(null);
+            props.onChange(null);
             return;
         }
 
         setSelectedItem(selectedItems[0]);
-
-        // todo: raise an event at this point...
+        props.onChange(selectedItems[0]);
     };
 
     return (

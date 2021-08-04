@@ -30,9 +30,12 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Full screen map
 -   [x] Implement correct type ahead functionality
 -   [x] From and to search
--   [ ] EV mileage field
--   [ ] Sidebar form validation
+-   [x] EV mileage field
+-   [x] Sidebar form validation
+-   [ ] Sort out `from` and `to` field attribution tooltips
+-   [ ] Perform the route search
 -   [ ] Displaying route on the map
--   [ ] Suggest walking/cycling
+-   [ ] Create/implement the EV algorithm
+-   [ ] Suggest walking/cycling instead
 
 ## Tech stack
