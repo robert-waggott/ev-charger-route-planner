@@ -25,10 +25,8 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## Todo
 
--   [x] Scaffold server
--   [x] Scaffold UI
--   [x] Full screen map
--   [x] Implement correct type ahead functionality
+...
+
 -   [x] From and to search
 -   [x] EV mileage field
 -   [x] Sidebar form validation
