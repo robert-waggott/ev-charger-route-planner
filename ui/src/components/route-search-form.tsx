@@ -6,6 +6,7 @@ import { AttributedSearchInput } from "./search-input";
 import { Formik, FormikHelpers } from "formik";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
 import { RouteContext } from "../App";
+import { RouteSearchService } from "../services/route-search-service";
 
 interface RouteSearchFormProps {
     onSearchSubmitted: () => unknown;
@@ -67,6 +68,8 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
     };
     const onSubmit = async (values: RouteSearch, { setSubmitting }: FormikHelpers<RouteSearch>) => {
         setRouteSearch(values);
+
+        const route = await new RouteSearchService().performSearch(values);
 
         props.onSearchSubmitted();
 
