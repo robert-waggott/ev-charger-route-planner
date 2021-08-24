@@ -32,8 +32,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Sidebar form validation
 -   [ ] Sort out `from` and `to` field attribution tooltips
 -   [ ] Perform the route search
--   [ ] Displaying route on the map
+-   [ ] Start displaying route on the map
+-   [ ] Ability to choose between different routes
 -   [ ] Create/implement the EV algorithm
+-   [ ] Suggesting places to grab a coffee/use the toilet whilst EV is charging
 -   [ ] Suggest walking/cycling instead
 
 ## Tech stack
