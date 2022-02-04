@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { RouteContext } from "../App";
 import { NullableConfig } from "../interfaces/config";
 import { ConfigService } from "../services/config-service";
+import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {}
 
@@ -41,40 +42,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
 
             mapRef.current.on("load", () => {
                 if (route) {
-                    if (mapRef.current.getLayer("route")) {
-                        mapRef.current.removeLayer("route");
-                    }
-
-                    if (mapRef.current.getSource("route")) {
-                        mapRef.current.removeSource("route");
-                    }
-
-                    mapRef.current.addSource("route", {
-                        type: "geojson",
-                        data: route.geometry as any
-                    });
-
-                    mapRef.current.addLayer({
-                        id: "route",
-                        type: "line",
-                        source: "route",
-                        layout: {
-                            "line-join": "round",
-                            "line-cap": "round"
-                        },
-                        paint: {
-                            "line-color": "#228C22",
-                            "line-width": 5,
-                            "line-dasharray": [1, 2]
-                        }
-                    });
-                    var bounds = new LngLatBounds();
-
-                    route.geometry.coordinates.forEach((coord) => {
-                        bounds.extend([coord[0], coord[1]] as LngLatLike);
-                    });
-
-                    mapRef.current.fitBounds(bounds, { padding: 30 });
+                    new RouteBuildingService(route, mapRef.current).mapRoute();
                 }
             });
         }
