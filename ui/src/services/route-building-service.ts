@@ -2,6 +2,7 @@ import { LngLatBounds, LngLatLike, Map, MapLayerMouseEvent, MapMouseEvent, Popup
 import { Route } from "../interfaces/route";
 import { Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
+import { ChargeDevice } from "../interfaces/charge-points-response";
 
 export class RouteBuildingService {
     chargingPointsService: ChargingPointsService;
@@ -126,16 +127,15 @@ export class RouteBuildingService {
                 return;
             }
 
-            var coordinates = e.features[0].geometry.coordinates.slice();
-            var description = e.features[0].properties.description;
+            const chargeStation = e.features[0].properties as ChargeDevice;
+
+            console.log(chargeStation);
         });
 
-        // Change the cursor to a pointer when the mouse is over the places layer.
         this.map.on("mouseenter", nearbyChargingPointsID, () => {
             this.map.getCanvas().style.cursor = "pointer";
         });
 
-        // Change it back to a pointer when it leaves.
         this.map.on("mouseleave", nearbyChargingPointsID, () => {
             this.map.getCanvas().style.cursor = "";
         });

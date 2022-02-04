@@ -1,12 +1,16 @@
 import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
-import { RouteContext } from "../App";
+import { RouteContext, SelectedChargeDeviceContext } from "../App";
 import { NullableConfig } from "../interfaces/config";
 import { ConfigService } from "../services/config-service";
 import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {}
+
+export interface MappedRouteProps {
+    map: maplibregl.Map;
+}
 
 const MapContainerDiv = styled.div`
     position: absolute;
@@ -15,11 +19,27 @@ const MapContainerDiv = styled.div`
     width: 100%;
 `;
 
+export const MappedRoute = (props: MappedRouteProps) => {
+    const { route } = React.useContext(RouteContext);
+    const { setChargeDevice } = React.useContext(SelectedChargeDeviceContext);
+
+    async function mapRoute() {
+        if (route) {
+            await new RouteBuildingService(route, props.map).mapRoute();
+        }
+    }
+
+    React.useEffect(() => {
+        mapRoute();
+    }, [route]);
+
+    return <></>;
+};
+
 export const FullScreenMap = (props: FullScreenMapProps) => {
     const [config, setConfig] = React.useState<NullableConfig>(null);
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
-    const { route } = React.useContext(RouteContext);
 
     async function getConfig() {
         const config = await new ConfigService().getConfig();
@@ -39,15 +59,12 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
                 center: [-1.631291, 52.48278],
                 zoom: 4
             });
-
-            mapRef.current.on("load", async () => {
-                if (route) {
-                    await new RouteBuildingService(route, mapRef.current).mapRoute();
-                }
-            });
         }
-    }, [config, route]);
+    }, [config]);
 
-    // todo: refactor using forwardRef to prevent this being rebuilt when the route is loaded in - https://reactjs.org/docs/forwarding-refs.html
-    return <MapContainerDiv ref={mapContainerRef} id="map" />;
+    return (
+        <MapContainerDiv ref={mapContainerRef} id="map">
+            <MappedRoute map={mapRef.current} />
+        </MapContainerDiv>
+    );
 };
