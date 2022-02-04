@@ -9,8 +9,6 @@ export class RouteSearchService extends BaseService {
             ...routeSearchParams
         };
 
-        console.log(request);
-
         return await this.post("/RouteSearch", request);
     }
 }
