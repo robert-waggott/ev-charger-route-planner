@@ -71,6 +71,8 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
 
         const route = await new RouteSearchService().performSearch(values);
 
+        setRoute(route);
+
         props.onSearchSubmitted();
 
         // todo: perform the search or use a reducer to do so?
@@ -80,7 +82,7 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
     return (
         <Formik initialValues={routeSearch} validate={validate} onSubmit={onSubmit}>
             {({ values, errors, handleChange, handleSubmit, setFieldValue, isSubmitting }) => (
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} spellCheck="false">
                     <Form.Group className="mb-3" controlId="from">
                         <Form.Label>From</Form.Label>
 

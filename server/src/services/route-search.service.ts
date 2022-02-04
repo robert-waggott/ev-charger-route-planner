@@ -27,13 +27,19 @@ export class RouteSearchService {
         const profile = routeSearchRequest.includeTraffic ? "mapbox/driving-traffic" : "mapbox/driving";
         const url = `https://api.mapbox.com/directions/v5/${profile}/${routeSearchRequest.fromLatLng.lng},${routeSearchRequest.fromLatLng.lat};${routeSearchRequest.toLatLng.lng},${routeSearchRequest.toLatLng.lat}?${query}`;
 
-        console.log(url);
-
         const response = await axios.get(url);
 
-        console.log("mapbox response", response.data.routes[0]);
+        const firstRoute = response.data.routes[0];
 
-        return response.data.routes.map((route) => {});
+        console.log("mapbox response", firstRoute);
+
+        return {
+            geometry: firstRoute.geometry,
+            numberOfSteps: firstRoute.legs.length,
+            distanceInMeters: firstRoute.distance,
+            distanceInKm: firstRoute.distance / 1000,
+            distanceInMiles: firstRoute.distance * 0.000621371
+        };
 
         /* 
 {
@@ -81,16 +87,6 @@ export class RouteSearchService {
   }
 }        
         */
-
-        return {
-            attribution: response.data.attribution,
-            results: response.data.features.map((feature: any) => ({
-                name: feature.text,
-                description: feature.place_name,
-                center: new LatLng(feature.center[1], feature.center[0]),
-                relevance: feature.relevance
-            }))
-        };
     }
 
     getExclusionList(routeSearchRequest: RouteSearchRequestDto) {
