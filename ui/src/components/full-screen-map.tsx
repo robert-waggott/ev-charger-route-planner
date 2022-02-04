@@ -1,4 +1,4 @@
-import maplibregl, { LngLatBounds, LngLatLike } from "maplibre-gl";
+import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import { RouteContext } from "../App";
@@ -19,7 +19,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
     const [config, setConfig] = React.useState<NullableConfig>(null);
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
-    const { route, setRoute } = React.useContext(RouteContext);
+    const { route } = React.useContext(RouteContext);
 
     async function getConfig() {
         const config = await new ConfigService().getConfig();
@@ -40,13 +40,14 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
                 zoom: 4
             });
 
-            mapRef.current.on("load", () => {
+            mapRef.current.on("load", async () => {
                 if (route) {
-                    new RouteBuildingService(route, mapRef.current).mapRoute();
+                    await new RouteBuildingService(route, mapRef.current).mapRoute();
                 }
             });
         }
     }, [config, route]);
 
+    // todo: refactor using forwardRef to prevent this being rebuilt when the route is loaded in - https://reactjs.org/docs/forwarding-refs.html
     return <MapContainerDiv ref={mapContainerRef} id="map" />;
 };

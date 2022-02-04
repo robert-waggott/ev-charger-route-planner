@@ -1,6 +1,6 @@
 import { LngLatBounds, LngLatLike, Map } from "maplibre-gl";
 import { Route } from "../interfaces/route";
-import { Point, Position } from "geojson";
+import { Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
 
 export class RouteBuildingService {
@@ -10,7 +10,13 @@ export class RouteBuildingService {
         this.chargingPointsService = new ChargingPointsService();
     }
 
-    public mapRoute() {
+    public async mapRoute() {
+        const image = await this.loadChargingStationImage();
+
+        if (!this.map.hasImage("ev-icon")) {
+            this.map.addImage("ev-icon", image);
+        }
+
         if (this.map.getLayer("route")) {
             this.map.removeLayer("route");
         }
@@ -39,8 +45,8 @@ export class RouteBuildingService {
             }
         });
 
-        this.mapPoint(this.route.geometry.coordinates[0], "start-point");
-        this.mapPoint(this.route.geometry.coordinates[this.route.geometry.coordinates.length - 1], "end-point");
+        await this.mapPoint(this.route.geometry.coordinates[0], "start-point");
+        await this.mapPoint(this.route.geometry.coordinates[this.route.geometry.coordinates.length - 1], "end-point");
 
         this.fitBounds();
     }
@@ -52,12 +58,6 @@ export class RouteBuildingService {
 
         if (this.map.getSource(id)) {
             this.map.removeSource(id);
-        }
-
-        const nearbyChargingPointsID = `${id}-nearby-charging-points`;
-
-        if (this.map.getSource(nearbyChargingPointsID)) {
-            this.map.removeSource(nearbyChargingPointsID);
         }
 
         this.map.addSource(id, {
@@ -83,6 +83,16 @@ export class RouteBuildingService {
             lng: coord[0]
         });
 
+        const nearbyChargingPointsID = `${id}-nearby-charging-points`;
+
+        if (this.map.getLayer(nearbyChargingPointsID)) {
+            this.map.removeLayer(nearbyChargingPointsID);
+        }
+
+        if (this.map.getSource(nearbyChargingPointsID)) {
+            this.map.removeSource(nearbyChargingPointsID);
+        }
+
         this.map.addSource(nearbyChargingPointsID, {
             type: "geojson",
             data: {
@@ -101,19 +111,21 @@ export class RouteBuildingService {
             }
         });
 
-        this.map.loadImage("/charging-station.png", (error: string, image: any) => {
-            if (!this.map.hasImage("ev-icon")) {
-                this.map.addImage("ev-icon", image);
+        this.map.addLayer({
+            id: nearbyChargingPointsID,
+            type: "symbol",
+            source: nearbyChargingPointsID,
+            layout: {
+                "icon-image": "ev-icon",
+                "icon-size": 0.75
             }
+        });
+    }
 
-            this.map.addLayer({
-                id: nearbyChargingPointsID,
-                type: "symbol",
-                source: nearbyChargingPointsID,
-                layout: {
-                    "icon-image": "ev-icon",
-                    "icon-size": 0.25
-                }
+    private loadChargingStationImage(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.map.loadImage("/charging-station.png", (error: string, image: any) => {
+                resolve(image);
             });
         });
     }

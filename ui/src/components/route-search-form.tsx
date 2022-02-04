@@ -35,7 +35,7 @@ const ErrorContainer = (props: ErrorContainerProps) => {
 };
 
 export const RouteSearchForm = (props: RouteSearchFormProps) => {
-    const { route, setRoute } = React.useContext(RouteContext);
+    const { setRoute } = React.useContext(RouteContext);
     const [routeSearch, setRouteSearch] = React.useState<RouteSearch>({
         from: null,
         to: null,

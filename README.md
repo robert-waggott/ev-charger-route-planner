@@ -32,8 +32,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Sidebar form validation
 -   [x] Perform the route search
 -   [x] Start displaying route on the map
--   [ ] Display EV chargers near start point of journey
--   [ ] Display EV chargers near end point of journey
+-   [x] Display EV chargers near start point of journey
+-   [x] Display EV chargers near end point of journey
+-   [ ] Allow EV charger icons to be clicked upon
+-   [ ] Open EV charger details in right hand side panel
 -   [ ] Sort out `from` and `to` field attribution tooltips
 -   [ ] Ability to choose between different routes
 -   [ ] Create/implement the EV algorithm
