@@ -8,7 +8,12 @@ import { BaseService } from "./base-service";
 export class ChargingPointsService extends BaseService {
     async getChargingPoints(latLng: LatLng): Promise<ChargeDevice[]> {
         const response = await axios.get<ChargePointsResponse>(
-            `https://chargepoints.dft.gov.uk/api/retrieve/registry/format/json/lat/${latLng.lat}/long/${latLng.lng}/limit/10/dist/1`
+            `https://chargepoints.dft.gov.uk/api/retrieve/registry/format/json/lat/${latLng.lat}/long/${latLng.lng}/limit/10/dist/1`,
+            {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            }
         );
 
         return response.data.ChargeDevice.filter((chargeDevice) => chargeDevice.DateDeleted === "n/a");

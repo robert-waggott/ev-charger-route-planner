@@ -101,16 +101,18 @@ export class RouteBuildingService {
             }
         });
 
-        this.map.loadImage("", (error: string, image: any) => {
-            this.map.addImage("ev-icon", image);
+        this.map.loadImage("/charging-station.png", (error: string, image: any) => {
+            if (!this.map.hasImage("ev-icon")) {
+                this.map.addImage("ev-icon", image);
+            }
 
             this.map.addLayer({
                 id: nearbyChargingPointsID,
                 type: "symbol",
                 source: nearbyChargingPointsID,
-                paint: {
-                    "circle-radius": 12,
-                    "circle-color": "#228C22"
+                layout: {
+                    "icon-image": "ev-icon",
+                    "icon-size": 0.25
                 }
             });
         });
