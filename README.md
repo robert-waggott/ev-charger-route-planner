@@ -30,9 +30,11 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] From and to search
 -   [x] EV mileage field
 -   [x] Sidebar form validation
+-   [x] Perform the route search
+-   [x] Start displaying route on the map
+-   [ ] Display EV chargers near start point of journey
+-   [ ] Display EV chargers near end point of journey
 -   [ ] Sort out `from` and `to` field attribution tooltips
--   [ ] Perform the route search
--   [ ] Start displaying route on the map
 -   [ ] Ability to choose between different routes
 -   [ ] Create/implement the EV algorithm
 -   [ ] Suggesting places to grab a coffee/use the toilet whilst EV is charging
