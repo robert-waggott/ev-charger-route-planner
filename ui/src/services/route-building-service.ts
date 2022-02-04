@@ -1,4 +1,4 @@
-import { LngLatBounds, LngLatLike, Map } from "maplibre-gl";
+import { LngLatBounds, LngLatLike, Map, MapLayerMouseEvent, MapMouseEvent, Popup } from "maplibre-gl";
 import { Route } from "../interfaces/route";
 import { Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
@@ -120,12 +120,35 @@ export class RouteBuildingService {
                 "icon-size": 0.75
             }
         });
+
+        this.map.on("click", nearbyChargingPointsID, (e: MapLayerMouseEvent) => {
+            if (!e.features) {
+                return;
+            }
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        this.map.on("mouseenter", nearbyChargingPointsID, () => {
+            this.map.getCanvas().style.cursor = "pointer";
+        });
+
+        // Change it back to a pointer when it leaves.
+        this.map.on("mouseleave", nearbyChargingPointsID, () => {
+            this.map.getCanvas().style.cursor = "";
+        });
     }
 
     private loadChargingStationImage(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.map.loadImage("/charging-station.png", (error: string, image: any) => {
-                resolve(image);
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(image);
+                }
             });
         });
     }
