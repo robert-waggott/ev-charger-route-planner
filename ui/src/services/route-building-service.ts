@@ -1,8 +1,16 @@
-import { LngLatBounds, LngLatLike, Map, MapLayerMouseEvent, MapMouseEvent, Popup } from "maplibre-gl";
+import {
+    LngLatBounds,
+    LngLatLike,
+    Map,
+    MapboxGeoJSONFeature,
+    MapLayerMouseEvent,
+    MapMouseEvent,
+    Popup
+} from "maplibre-gl";
 import { Route } from "../interfaces/route";
-import { Position } from "geojson";
+import { Feature, Point, Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
-import { ChargeDevice } from "../interfaces/charge-points-response";
+import { ChargeDevice, ChargeDeviceLocation } from "../interfaces/charge-points-response";
 
 export class RouteBuildingService {
     chargingPointsService: ChargingPointsService;
@@ -102,17 +110,20 @@ export class RouteBuildingService {
             type: "geojson",
             data: {
                 type: "FeatureCollection",
-                features: nearbyChargingPoints.map((chargingPoint) => ({
-                    type: "Feature",
-                    properties: chargingPoint,
-                    geometry: {
-                        type: "Point",
-                        coordinates: [
-                            chargingPoint.ChargeDeviceLocation.Longitude,
-                            chargingPoint.ChargeDeviceLocation.Latitude
-                        ]
-                    }
-                }))
+                features: nearbyChargingPoints.map(
+                    (chargingPoint) =>
+                        ({
+                            type: "Feature",
+                            properties: chargingPoint,
+                            geometry: {
+                                type: "Point",
+                                coordinates: [
+                                    chargingPoint.ChargeDeviceLocation.Longitude,
+                                    chargingPoint.ChargeDeviceLocation.Latitude
+                                ]
+                            }
+                        } as Feature<Point, ChargeDevice>)
+                )
             }
         });
 
@@ -132,6 +143,11 @@ export class RouteBuildingService {
             }
 
             const chargeStation = e.features[0].properties as ChargeDevice;
+
+            chargeStation.ChargeDeviceLocation = JSON.parse(e.features[0].properties?.ChargeDeviceLocation);
+            chargeStation.Connector = JSON.parse(e.features[0].properties?.Connector);
+            chargeStation.DeviceOwner = JSON.parse(e.features[0].properties?.DeviceOwner);
+            chargeStation.DeviceController = JSON.parse(e.features[0].properties?.DeviceController);
 
             this.chargeDeviceSelectedCallback(chargeStation);
         });
