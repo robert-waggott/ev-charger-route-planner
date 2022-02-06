@@ -25,7 +25,9 @@ export const MappedRoute = (props: MappedRouteProps) => {
 
     async function mapRoute() {
         if (route) {
-            await new RouteBuildingService(route, props.map).mapRoute();
+            await new RouteBuildingService(route, props.map, (chargeDevice) => {
+                setChargeDevice(chargeDevice);
+            }).mapRoute();
         }
     }
 

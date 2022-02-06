@@ -7,7 +7,11 @@ import { ChargeDevice } from "../interfaces/charge-points-response";
 export class RouteBuildingService {
     chargingPointsService: ChargingPointsService;
 
-    constructor(private route: Route, private map: Map) {
+    constructor(
+        private route: Route,
+        private map: Map,
+        private chargeDeviceSelectedCallback: (chargeDevice: ChargeDevice | null) => unknown
+    ) {
         this.chargingPointsService = new ChargingPointsService();
     }
 
@@ -129,7 +133,7 @@ export class RouteBuildingService {
 
             const chargeStation = e.features[0].properties as ChargeDevice;
 
-            console.log(chargeStation);
+            this.chargeDeviceSelectedCallback(chargeStation);
         });
 
         this.map.on("mouseenter", nearbyChargingPointsID, () => {

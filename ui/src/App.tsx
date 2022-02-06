@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { FullScreenMap } from "./components/full-screen-map";
-import { Sidebar } from "./components/sidebar";
+import { ChargeDeviceDetailsSidebar, SearchSidebar } from "./components/sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route } from "./interfaces/route";
 import { ChargeDevice } from "./interfaces/charge-points-response";
@@ -29,8 +29,9 @@ function App() {
         <div className="App">
             <RouteContext.Provider value={{ route, setRoute }}>
                 <SelectedChargeDeviceContext.Provider value={{ chargeDevice, setChargeDevice }}>
-                    <Sidebar />
+                    <SearchSidebar />
                     <FullScreenMap />
+                    <ChargeDeviceDetailsSidebar />
                 </SelectedChargeDeviceContext.Provider>
             </RouteContext.Provider>
         </div>
