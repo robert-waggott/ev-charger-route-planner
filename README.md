@@ -36,6 +36,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Open EV charger details in right hand side panel
 -   [ ] Sort out `from` and `to` field attribution tooltips
 -   [ ] Ability to choose between different routes
+-   [ ] Error boundaries
 -   [ ] Create/implement the EV algorithm
 
 ## Nice to have
