@@ -31,8 +31,6 @@ export class RouteSearchService {
 
         const firstRoute = response.data.routes[0];
 
-        console.log("mapbox response", firstRoute);
-
         return {
             geometry: firstRoute.geometry,
             numberOfSteps: firstRoute.legs.length,
