@@ -142,12 +142,14 @@ export class RouteBuildingService {
                 return;
             }
 
-            const chargeStation = e.features[0].properties as ChargeDevice;
+            // todo - refactor this:
+            const props = e.features[0].properties!;
+            const chargeStation = props as ChargeDevice;
 
-            chargeStation.ChargeDeviceLocation = JSON.parse(e.features[0].properties?.ChargeDeviceLocation);
-            chargeStation.Connector = JSON.parse(e.features[0].properties?.Connector);
-            chargeStation.DeviceOwner = JSON.parse(e.features[0].properties?.DeviceOwner);
-            chargeStation.DeviceController = JSON.parse(e.features[0].properties?.DeviceController);
+            chargeStation.ChargeDeviceLocation = JSON.parse(props.ChargeDeviceLocation);
+            chargeStation.Connector = JSON.parse(props.Connector);
+            chargeStation.DeviceOwner = JSON.parse(props.DeviceOwner);
+            chargeStation.DeviceController = JSON.parse(props.DeviceController);
 
             this.chargeDeviceSelectedCallback(chargeStation);
         });

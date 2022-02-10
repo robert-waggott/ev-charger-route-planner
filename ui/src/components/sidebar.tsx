@@ -69,23 +69,47 @@ export const ChargeDeviceDetailsSidebar = (props: SidebarProps) => {
                         </Col>
                         <Col>{chargeDevice?.ChargeDeviceName}</Col>
                     </Row>
+                    {chargeDevice?.PaymentDetails ? (
+                        <Row className="g-0">
+                            <Col>
+                                <strong>Payment details</strong>
+                            </Col>
+                            <Col>{chargeDevice?.PaymentDetails}</Col>
+                        </Row>
+                    ) : (
+                        <></>
+                    )}
+                    {chargeDevice?.LocationType ? (
+                        <Row className="g-0">
+                            <Col>
+                                <strong>Type of location</strong>
+                            </Col>
+                            <Col>{chargeDevice?.LocationType}</Col>
+                        </Row>
+                    ) : (
+                        <></>
+                    )}
                     <Row className="g-0">
                         <Col>
-                            <strong>Payment details</strong>
+                            <strong>Parking fees apply?</strong>
                         </Col>
-                        <Col>{chargeDevice?.PaymentDetails}</Col>
+                        <Col>{chargeDevice?.ParkingFeesFlag ? "Yes" : "No"}</Col>
                     </Row>
+                    {chargeDevice?.ParkingFeesDetails ? (
+                        <Row className="g-0">
+                            <Col>
+                                <strong>Parking fee details</strong>
+                            </Col>
+                            <Col>{chargeDevice?.ParkingFeesDetails}</Col>
+                        </Row>
+                    ) : (
+                        <></>
+                    )}
                     <Row className="g-0">
                         <Col>
-                            <strong>Type of location</strong>
+                            <strong>Accessible 24 hours a day?</strong>
                         </Col>
-                        <Col>{chargeDevice?.LocationType}</Col>
-                    </Row>
-                    <Row className="g-0">
-                        <Col>
-                            <strong>Latitude</strong>
-                        </Col>
-                        <Col>{chargeDevice?.ChargeDeviceLocation.Latitude}</Col>
+                        <Col>{chargeDevice?.Accessible24Hours ? "Yes" : "No"}</Col>
                     </Row>
                 </Container>
             </Offcanvas.Body>

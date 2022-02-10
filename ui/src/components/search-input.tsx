@@ -84,7 +84,7 @@ export const SearchInput = (props: SearchInputProps) => {
             renderMenu={(results, menuProps) => (
                 <Menu {...menuProps}>
                     {results.map((result, index) => (
-                        <MenuItem option={result} position={index}>
+                        <MenuItem key={index} option={result} position={index}>
                             {result.name}
                             {result.description ? <StyledAddressSpan>{result.description}</StyledAddressSpan> : ""}
                         </MenuItem>
