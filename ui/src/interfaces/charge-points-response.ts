@@ -47,9 +47,31 @@ export interface ChargeDevice {
 export interface ChargeDeviceLocation {
     Latitude: number;
     Longitude: number;
-    Address: { [key: string]: null | string };
+    Address?: ChargeDeviceAddress | null;
     LocationShortDescription: null | string;
     LocationLongDescription: null | string;
+}
+
+export class ChargeDeviceAddress {
+    BuildingName?: string;
+    BuildingNumber?: string;
+    Street?: string;
+    PostTown?: string;
+    County?: string;
+    PostCode?: string;
+
+    get fullAddress(): string {
+        const parts = [
+            this.BuildingName,
+            this.BuildingNumber,
+            this.Street,
+            this.PostCode,
+            this.County,
+            this.PostCode
+        ].filter((part) => part !== undefined && part.length > 0);
+
+        return parts.join("\n");
+    }
 }
 
 export enum ChargeStatus {

@@ -69,6 +69,18 @@ export const ChargeDeviceDetailsSidebar = (props: SidebarProps) => {
                         </Col>
                         <Col>{chargeDevice?.ChargeDeviceName}</Col>
                     </Row>
+                    {chargeDevice?.ChargeDeviceLocation?.Address ? (
+                        <Row className="g-0">
+                            <Col>
+                                <strong>Address</strong>
+                            </Col>
+                            <Col style={{ whiteSpace: "pre-wrap" }}>
+                                {chargeDevice?.ChargeDeviceLocation?.Address?.fullAddress}
+                            </Col>
+                        </Row>
+                    ) : (
+                        <></>
+                    )}
                     {chargeDevice?.PaymentDetails ? (
                         <Row className="g-0">
                             <Col>
