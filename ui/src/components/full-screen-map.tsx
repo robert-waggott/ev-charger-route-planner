@@ -44,7 +44,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
     const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
 
     async function getConfig() {
-        const config = await new ConfigService().getConfig();
+        const config = await new ConfigService().getConfig(); // todo: make this a constant or app context so can be used in sidebar map too
 
         setConfig(config);
     }

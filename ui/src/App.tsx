@@ -1,9 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react";
+
 import { FullScreenMap } from "./components/full-screen-map";
-import { ChargeDeviceDetailsSidebar, SearchSidebar } from "./components/sidebar";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { SearchSidebar } from "./components/sidebar";
 import { Route } from "./interfaces/route";
 import { ChargeDevice } from "./interfaces/charge-points-response";
+import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-sidebar";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export type RouteContextDefaultValue = {
     route: Route | null;
@@ -15,7 +18,10 @@ export type SelectedChargeDeviceContextDefaultValue = {
     setChargeDevice: Dispatch<SetStateAction<ChargeDevice | null>>;
 };
 
-export const RouteContext = React.createContext<RouteContextDefaultValue>({ route: null, setRoute: () => {} });
+export const RouteContext = React.createContext<RouteContextDefaultValue>({
+    route: null,
+    setRoute: () => {}
+});
 export const SelectedChargeDeviceContext = React.createContext<SelectedChargeDeviceContextDefaultValue>({
     chargeDevice: null,
     setChargeDevice: () => {}
