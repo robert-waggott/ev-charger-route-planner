@@ -1,9 +1,7 @@
 import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
-import { RouteContext, SelectedChargeDeviceContext } from "../App";
-import { NullableConfig } from "../interfaces/config";
-import { ConfigService } from "../services/config-service";
+import { ConfigContext, RouteContext, SelectedChargeDeviceContext } from "../App";
 import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {}
@@ -39,19 +37,9 @@ export const MappedRoute = (props: MappedRouteProps) => {
 };
 
 export const FullScreenMap = (props: FullScreenMapProps) => {
-    const [config, setConfig] = React.useState<NullableConfig>(null);
+    const { config } = React.useContext(ConfigContext);
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
-
-    async function getConfig() {
-        const config = await new ConfigService().getConfig(); // todo: make this a constant or app context so can be used in sidebar map too
-
-        setConfig(config);
-    }
-
-    React.useEffect(() => {
-        getConfig();
-    }, []);
 
     React.useEffect(() => {
         if (config) {
