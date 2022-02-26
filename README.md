@@ -33,8 +33,8 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Display EV chargers near start point of journey
 -   [x] Display EV chargers near end point of journey
 -   [x] Allow EV charger icons to be clicked upon
--   [ ] Open EV charger details in right hand side panel
--   [ ] EV charger details map in right hand side panel
+-   [x] Open EV charger details in right hand side panel
+-   [x] EV charger details map in right hand side panel
 -   [ ] Sort out `from` and `to` field attribution tooltips
 -   [ ] Ability to choose between different routes
 -   [ ] Error boundaries

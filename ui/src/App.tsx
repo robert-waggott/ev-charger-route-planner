@@ -6,9 +6,9 @@ import { Route } from "./interfaces/route";
 import { Config } from "./interfaces/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";
 import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-sidebar";
+import { ConfigService } from "./services/config-service";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ConfigService } from "./services/config-service";
 
 export type RouteContextDefaultValue = {
     route: Route | null;
@@ -20,11 +20,6 @@ export type ConfigContextDefaultValue = {
     setConfig: Dispatch<SetStateAction<Config | null>>;
 };
 
-export type SelectedChargeDeviceContextDefaultValue = {
-    chargeDevice: ChargeDevice | null;
-    setChargeDevice: Dispatch<SetStateAction<ChargeDevice | null>>;
-};
-
 export const RouteContext = React.createContext<RouteContextDefaultValue>({
     route: null,
     setRoute: () => {}
@@ -33,15 +28,11 @@ export const ConfigContext = React.createContext<ConfigContextDefaultValue>({
     config: null,
     setConfig: () => {}
 });
-export const SelectedChargeDeviceContext = React.createContext<SelectedChargeDeviceContextDefaultValue>({
-    chargeDevice: null,
-    setChargeDevice: () => {}
-});
 
 function App() {
     const [route, setRoute] = React.useState<Route | null>(null);
-    const [chargeDevice, setChargeDevice] = React.useState<ChargeDevice | null>(null);
     const [config, setConfig] = React.useState<Config | null>(null);
+    const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
     async function getConfig() {
         const config = await new ConfigService().getConfig(); // todo: make this a constant or app context so can be used in sidebar map too
@@ -56,13 +47,11 @@ function App() {
     return (
         <div className="App">
             <RouteContext.Provider value={{ route, setRoute }}>
-                <SelectedChargeDeviceContext.Provider value={{ chargeDevice, setChargeDevice }}>
-                    <ConfigContext.Provider value={{ config, setConfig }}>
-                        <SearchSidebar />
-                        <FullScreenMap />
-                        <ChargeDeviceDetailsSidebar />
-                    </ConfigContext.Provider>
-                </SelectedChargeDeviceContext.Provider>
+                <ConfigContext.Provider value={{ config, setConfig }}>
+                    <SearchSidebar />
+                    <FullScreenMap onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
+                    <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
+                </ConfigContext.Provider>
             </RouteContext.Provider>
         </div>
     );

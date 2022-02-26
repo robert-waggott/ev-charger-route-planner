@@ -1,22 +1,46 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Col, Container, Row } from "react-bootstrap";
 
-import { SelectedChargeDeviceContext } from "../App";
 import { ChargeDevice } from "../interfaces/charge-points-response";
+import { ConfigContext } from "../App";
+import maplibregl from "maplibre-gl";
 
 const MapContainerDiv = styled.div`
     width: 100%;
     height: 300px;
 `;
 
+interface ChargeDeviceDetailsSidebarProps {
+    chargeDevice: ChargeDevice | null;
+}
+
 interface ChargeDeviceDetailsMapProps {
-    ChargeDevice: ChargeDevice | null;
+    chargeDevice: ChargeDevice | null;
 }
 
 export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
-    const chargeDeviceLocation = props.ChargeDevice?.ChargeDeviceLocation;
+    const { config } = React.useContext(ConfigContext);
+    const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+    const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
+
+    React.useEffect(() => {
+        if (config && chargeDeviceLocation) {
+            mapRef.current = new maplibregl.Map({
+                container: mapContainerRef.current,
+                style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
+                center: [chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude],
+                zoom: 15
+            });
+
+            new maplibregl.Marker()
+                .setLngLat([chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude])
+                .addTo(mapRef.current);
+        }
+    }, [config]);
+
+    const chargeDeviceLocation = props.chargeDevice?.ChargeDeviceLocation;
 
     if (!chargeDeviceLocation || !chargeDeviceLocation.Latitude || !chargeDeviceLocation.Longitude) {
         return <></>;
@@ -25,21 +49,20 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
     return (
         <Row className="g-0">
             <Col>
-                <MapContainerDiv />
+                <MapContainerDiv ref={mapContainerRef} />
             </Col>
         </Row>
     );
 };
 
-export const ChargeDeviceDetailsSidebar = () => {
+export const ChargeDeviceDetailsSidebar = (props: ChargeDeviceDetailsSidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
-    const { chargeDevice } = React.useContext(SelectedChargeDeviceContext);
 
     React.useEffect(() => {
-        if (chargeDevice) {
+        if (props.chargeDevice) {
             setExpanded(true);
         }
-    }, [chargeDevice]);
+    }, [props.chargeDevice]);
 
     return (
         <Offcanvas show={expanded} placement="end" onHide={() => setExpanded(false)}>
@@ -52,36 +75,36 @@ export const ChargeDeviceDetailsSidebar = () => {
                         <Col>
                             <strong>Name</strong>
                         </Col>
-                        <Col>{chargeDevice?.ChargeDeviceName}</Col>
+                        <Col>{props.chargeDevice?.ChargeDeviceName}</Col>
                     </Row>
-                    {chargeDevice?.ChargeDeviceLocation?.Address ? (
+                    {props.chargeDevice?.ChargeDeviceLocation?.Address ? (
                         <Row className="g-0">
                             <Col>
                                 <strong>Address</strong>
                             </Col>
                             <Col style={{ whiteSpace: "pre-wrap" }}>
-                                {chargeDevice?.ChargeDeviceLocation?.Address?.fullAddress}
+                                {props.chargeDevice?.ChargeDeviceLocation?.Address?.fullAddress}
                             </Col>
                         </Row>
                     ) : (
                         <></>
                     )}
-                    {chargeDevice?.PaymentDetails ? (
+                    {props.chargeDevice?.PaymentDetails ? (
                         <Row className="g-0">
                             <Col>
                                 <strong>Payment details</strong>
                             </Col>
-                            <Col>{chargeDevice?.PaymentDetails}</Col>
+                            <Col>{props.chargeDevice?.PaymentDetails}</Col>
                         </Row>
                     ) : (
                         <></>
                     )}
-                    {chargeDevice?.LocationType ? (
+                    {props.chargeDevice?.LocationType ? (
                         <Row className="g-0">
                             <Col>
                                 <strong>Type of location</strong>
                             </Col>
-                            <Col>{chargeDevice?.LocationType}</Col>
+                            <Col>{props.chargeDevice?.LocationType}</Col>
                         </Row>
                     ) : (
                         <></>
@@ -90,14 +113,14 @@ export const ChargeDeviceDetailsSidebar = () => {
                         <Col>
                             <strong>Parking fees apply?</strong>
                         </Col>
-                        <Col>{chargeDevice?.ParkingFeesFlag ? "Yes" : "No"}</Col>
+                        <Col>{props.chargeDevice?.ParkingFeesFlag ? "Yes" : "No"}</Col>
                     </Row>
-                    {chargeDevice?.ParkingFeesDetails ? (
+                    {props.chargeDevice?.ParkingFeesDetails ? (
                         <Row className="g-0">
                             <Col>
                                 <strong>Parking fee details</strong>
                             </Col>
-                            <Col>{chargeDevice?.ParkingFeesDetails}</Col>
+                            <Col>{props.chargeDevice?.ParkingFeesDetails}</Col>
                         </Row>
                     ) : (
                         <></>
@@ -106,10 +129,10 @@ export const ChargeDeviceDetailsSidebar = () => {
                         <Col>
                             <strong>Accessible 24 hours a day?</strong>
                         </Col>
-                        <Col>{chargeDevice?.Accessible24Hours ? "Yes" : "No"}</Col>
+                        <Col>{props.chargeDevice?.Accessible24Hours ? "Yes" : "No"}</Col>
                     </Row>
 
-                    <ChargeDeviceDetailsMap ChargeDevice={chargeDevice} />
+                    <ChargeDeviceDetailsMap chargeDevice={props.chargeDevice} />
                 </Container>
             </Offcanvas.Body>
         </Offcanvas>
