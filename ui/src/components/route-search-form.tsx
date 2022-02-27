@@ -73,7 +73,6 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
 
         props.onSearchSubmitted(route);
 
-        // todo: perform the search or use a reducer to do so?
         setSubmitting(false);
     };
 

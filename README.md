@@ -23,7 +23,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   `MAPTILERAPIKEY` - An API key from [maptiler.com](https://cloud.maptiler.com/).
 -   `MAPBOXAPIKEY` - An API key from [mapbox.com](https://account.mapbox.com/).
 
-## Todo
+## Done
 
 -   [x] From and to search
 -   [x] EV mileage field
@@ -35,7 +35,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Allow EV charger icons to be clicked upon
 -   [x] Open EV charger details in right hand side panel
 -   [x] EV charger details map in right hand side panel
--   [ ] Sort out `from` and `to` field attribution tooltips
+-   [x] Sort out `from` and `to` field attribution tooltips
+
+## Todo
+
 -   [ ] Ability to choose between different routes
 -   [ ] Error boundaries
 -   [ ] Create/implement the EV algorithm

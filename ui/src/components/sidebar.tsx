@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Container } from "react-bootstrap";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { RouteSearchForm } from "./route-search-form";
 import { Route } from "../interfaces/route";
@@ -23,6 +24,15 @@ const StyledExpandButton = styled.button`
     background: none;
     cursor: pointer;
 `;
+
+const ErrorFallback = (error: Error) => {
+    return (
+        <div role="alert">
+            <p>Something went wrong:</p>
+            <pre>{error.message}</pre>
+        </div>
+    );
+};
 
 export const SearchSidebar = (props: SidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
