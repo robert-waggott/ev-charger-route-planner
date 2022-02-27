@@ -18,7 +18,7 @@ export class RouteBuildingService {
     constructor(
         private route: Route,
         private map: Map,
-        private chargeDeviceSelectedCallback: (chargeDevice: ChargeDevice | null) => unknown
+        private chargeDeviceSelectedCallback?: (chargeDevice: ChargeDevice | null) => unknown
     ) {
         this.chargingPointsService = new ChargingPointsService();
     }
@@ -91,6 +91,12 @@ export class RouteBuildingService {
             }
         });
 
+        if (this.chargeDeviceSelectedCallback) {
+            this.mapNearbyChargingPoints(coord, id);
+        }
+    }
+
+    private async mapNearbyChargingPoints(coord: Position, id: string) {
         const nearbyChargingPoints = await this.chargingPointsService.getChargingPoints({
             lat: coord[1],
             lng: coord[0]
@@ -142,7 +148,6 @@ export class RouteBuildingService {
                 return;
             }
 
-            // todo - refactor this:
             const props = e.features[0].properties!;
             const chargeStation = props as ChargeDevice;
 
@@ -151,7 +156,7 @@ export class RouteBuildingService {
             chargeStation.DeviceOwner = JSON.parse(props.DeviceOwner);
             chargeStation.DeviceController = JSON.parse(props.DeviceController);
 
-            this.chargeDeviceSelectedCallback(chargeStation);
+            this.chargeDeviceSelectedCallback!(chargeStation);
         });
 
         this.map.on("mouseenter", nearbyChargingPointsID, () => {

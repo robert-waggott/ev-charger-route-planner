@@ -40,7 +40,9 @@ MAPBOXAPIKEY=pk.eyJ1...
 ## Todo
 
 -   [ ] Ability to choose between different routes
--   [ ] Error boundaries
+-   [ ] Keep search panel open until route has been selected
+-   [ ] Map incidents
+-   [ ] Display instructions
 -   [ ] Create/implement the EV algorithm
 
 ## Nice to have

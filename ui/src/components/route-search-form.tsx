@@ -8,9 +8,10 @@ import { AttributedSearchInput } from "./search-input";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
 import { RouteSearchService } from "../services/route-search-service";
 import { Route } from "../interfaces/route";
+import { PossibleRoutes } from "../interfaces/possible-routes";
 
 interface RouteSearchFormProps {
-    onSearchSubmitted: (possibleRoutes: Route[]) => unknown;
+    onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
 }
 
 interface ErrorContainerProps {
@@ -69,9 +70,13 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
     const onSubmit = async (values: RouteSearch, { setSubmitting }: FormikHelpers<RouteSearch>) => {
         setRouteSearch(values);
 
-        const route = await new RouteSearchService().performSearch(values);
+        const routes = await new RouteSearchService().performSearch(values);
 
-        props.onSearchSubmitted(route);
+        props.onSearchSubmitted({
+            from: values.from!.name,
+            to: values.to!.name,
+            routes: routes
+        });
 
         setSubmitting(false);
     };

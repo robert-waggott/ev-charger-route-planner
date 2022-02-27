@@ -7,9 +7,10 @@ import { Config } from "./interfaces/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";
 import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-sidebar";
 import { ConfigService } from "./services/config-service";
+import { AvailableRoutesModal } from "./components/available-routes";
+import { PossibleRoutes } from "./interfaces/possible-routes";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AvailableRoutesModal } from "./components/available-routes";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -24,7 +25,7 @@ export const ConfigContext = React.createContext<ConfigContextDefaultValue>({
 function App() {
     const [config, setConfig] = React.useState<Config | null>(null);
     const [selectedRoute, setSelectedRoute] = React.useState<Route | null>(null);
-    const [possibleRoutes, setPossibleRoutes] = React.useState<Route[] | null>(null);
+    const [possibleRoutes, setPossibleRoutes] = React.useState<PossibleRoutes | null>(null);
     const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
     async function getConfig() {

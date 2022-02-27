@@ -7,9 +7,10 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { RouteSearchForm } from "./route-search-form";
 import { Route } from "../interfaces/route";
+import { PossibleRoutes } from "../interfaces/possible-routes";
 
 export interface SidebarProps {
-    onSearchSubmitted: (possibleRoutes: Route[]) => unknown;
+    onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
 }
 
 const StyledExpandButton = styled.button`
@@ -28,7 +29,7 @@ const StyledExpandButton = styled.button`
 export const SearchSidebar = (props: SidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
 
-    const onSearchSubmitted = (possibleRoutes: Route[]) => {
+    const onSearchSubmitted = (possibleRoutes: PossibleRoutes) => {
         setExpanded(false);
         props.onSearchSubmitted(possibleRoutes);
     };
