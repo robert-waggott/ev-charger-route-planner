@@ -10,7 +10,7 @@ import { RouteSearchService } from "../services/route-search-service";
 import { Route } from "../interfaces/route";
 
 interface RouteSearchFormProps {
-    onSearchSubmitted: (route: Route) => unknown;
+    onSearchSubmitted: (possibleRoutes: Route[]) => unknown;
 }
 
 interface ErrorContainerProps {

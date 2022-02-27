@@ -9,6 +9,7 @@ import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-s
 import { ConfigService } from "./services/config-service";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AvailableRoutesModal } from "./components/available-routes";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -23,6 +24,7 @@ export const ConfigContext = React.createContext<ConfigContextDefaultValue>({
 function App() {
     const [config, setConfig] = React.useState<Config | null>(null);
     const [selectedRoute, setSelectedRoute] = React.useState<Route | null>(null);
+    const [possibleRoutes, setPossibleRoutes] = React.useState<Route[] | null>(null);
     const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
     async function getConfig() {
@@ -38,9 +40,10 @@ function App() {
     return (
         <div className="App">
             <ConfigContext.Provider value={{ config, setConfig }}>
-                <SearchSidebar onSearchSubmitted={(route) => setSelectedRoute(route)} />
+                <SearchSidebar onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)} />
                 <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
+                <AvailableRoutesModal possibleRoutes={possibleRoutes} />
             </ConfigContext.Provider>
         </div>
     );

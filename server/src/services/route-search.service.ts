@@ -7,7 +7,7 @@ import { LocationSearchResponse } from "src/interfaces/location-search-response.
 
 @Injectable()
 export class RouteSearchService {
-    async getDrivingRoute(routeSearchRequest: RouteSearchRequestDto): Promise<DrivingRouteResponse> {
+    async getDrivingRoute(routeSearchRequest: RouteSearchRequestDto): Promise<DrivingRouteResponse[]> {
         const params: [string, string][] = [
             ["access_token", process.env.MAPBOXAPIKEY],
             ["alternatives", "true"],
@@ -29,15 +29,21 @@ export class RouteSearchService {
 
         const response = await axios.get(url);
 
+        console.log(response.data.routes[0].legs);
+
         const firstRoute = response.data.routes[0];
 
-        return {
-            geometry: firstRoute.geometry,
-            numberOfSteps: firstRoute.legs.length,
-            distanceInMeters: firstRoute.distance,
-            distanceInKm: firstRoute.distance / 1000,
-            distanceInMiles: firstRoute.distance * 0.000621371
-        };
+        return response.data.routes.map((route) => {
+            return {
+                summary: route.legs[0].summary,
+                durationInMinutes: route.legs[0].duration / 60,
+                geometry: route.geometry,
+                numberOfSteps: route.legs.length,
+                distanceInMeters: route.distance,
+                distanceInKm: route.distance / 1000,
+                distanceInMiles: route.distance * 0.000621371
+            };
+        });
 
         /* 
 {

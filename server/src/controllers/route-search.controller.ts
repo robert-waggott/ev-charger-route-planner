@@ -8,7 +8,7 @@ export class RouteSearchController {
     constructor(private routeSearchService: RouteSearchService) {}
 
     @Post()
-    async post(@Body() request: RouteSearchRequestDto): Promise<DrivingRouteResponse> {
+    async post(@Body() request: RouteSearchRequestDto): Promise<DrivingRouteResponse[]> {
         const response = this.routeSearchService.getDrivingRoute(request);
 
         return response;
