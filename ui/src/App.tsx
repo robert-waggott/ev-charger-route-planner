@@ -10,28 +10,19 @@ import { ConfigService } from "./services/config-service";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export type RouteContextDefaultValue = {
-    route: Route | null;
-    setRoute: Dispatch<SetStateAction<Route | null>>;
-};
-
 export type ConfigContextDefaultValue = {
     config: Config | null;
     setConfig: Dispatch<SetStateAction<Config | null>>;
 };
 
-export const RouteContext = React.createContext<RouteContextDefaultValue>({
-    route: null,
-    setRoute: () => {}
-});
 export const ConfigContext = React.createContext<ConfigContextDefaultValue>({
     config: null,
     setConfig: () => {}
 });
 
 function App() {
-    const [route, setRoute] = React.useState<Route | null>(null);
     const [config, setConfig] = React.useState<Config | null>(null);
+    const [selectedRoute, setSelectedRoute] = React.useState<Route | null>(null);
     const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
     async function getConfig() {
@@ -46,13 +37,11 @@ function App() {
 
     return (
         <div className="App">
-            <RouteContext.Provider value={{ route, setRoute }}>
-                <ConfigContext.Provider value={{ config, setConfig }}>
-                    <SearchSidebar />
-                    <FullScreenMap onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
-                    <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
-                </ConfigContext.Provider>
-            </RouteContext.Provider>
+            <ConfigContext.Provider value={{ config, setConfig }}>
+                <SearchSidebar onSearchSubmitted={(route) => setSelectedRoute(route)} />
+                <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
+                <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
+            </ConfigContext.Provider>
         </div>
     );
 }

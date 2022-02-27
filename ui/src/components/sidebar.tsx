@@ -5,8 +5,11 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Container } from "react-bootstrap";
 
 import { RouteSearchForm } from "./route-search-form";
+import { Route } from "../interfaces/route";
 
-export interface SidebarProps {}
+export interface SidebarProps {
+    onSearchSubmitted: (route: Route) => unknown;
+}
 
 const StyledExpandButton = styled.button`
     border: none;
@@ -24,6 +27,11 @@ const StyledExpandButton = styled.button`
 export const SearchSidebar = (props: SidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
 
+    const onSearchSubmitted = (route: Route) => {
+        setExpanded(false);
+        props.onSearchSubmitted(route);
+    };
+
     return (
         <>
             <StyledExpandButton onClick={() => setExpanded(true)}>
@@ -36,7 +44,7 @@ export const SearchSidebar = (props: SidebarProps) => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Container fluid>
-                        <RouteSearchForm onSearchSubmitted={() => setExpanded(false)} />
+                        <RouteSearchForm onSearchSubmitted={onSearchSubmitted} />
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

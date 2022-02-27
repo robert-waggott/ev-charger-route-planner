@@ -1,16 +1,20 @@
 import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
-import { ConfigContext, RouteContext } from "../App";
+
+import { ConfigContext } from "../App";
 import { ChargeDevice } from "../interfaces/charge-points-response";
+import { Route } from "../interfaces/route";
 import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {
+    route: Route | null;
     onChargeDeviceChanged: (chargeDevice: ChargeDevice | null) => unknown;
 }
 
 export interface MappedRouteProps {
     map: maplibregl.Map;
+    route: Route | null;
     onChargeDeviceChanged: (chargeDevice: ChargeDevice | null) => unknown;
 }
 
@@ -22,11 +26,9 @@ const MapContainerDiv = styled.div`
 `;
 
 export const MappedRoute = (props: MappedRouteProps) => {
-    const { route } = React.useContext(RouteContext);
-
     async function mapRoute() {
-        if (route) {
-            await new RouteBuildingService(route, props.map, (chargeDevice) => {
+        if (props.route) {
+            await new RouteBuildingService(props.route, props.map, (chargeDevice) => {
                 props.onChargeDeviceChanged(chargeDevice);
             }).mapRoute();
         }
@@ -34,7 +36,7 @@ export const MappedRoute = (props: MappedRouteProps) => {
 
     React.useEffect(() => {
         mapRoute();
-    }, [route]);
+    }, [props.route]);
 
     return <></>;
 };
@@ -57,7 +59,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
 
     return (
         <MapContainerDiv ref={mapContainerRef} id="map">
-            <MappedRoute map={mapRef.current} onChargeDeviceChanged={props.onChargeDeviceChanged} />
+            <MappedRoute map={mapRef.current} route={props.route} onChargeDeviceChanged={props.onChargeDeviceChanged} />
         </MapContainerDiv>
     );
 };

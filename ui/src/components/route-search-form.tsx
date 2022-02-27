@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Form from "react-bootstrap/Form";
 import { Button, Col, Row } from "react-bootstrap";
-import { AttributedSearchInput } from "./search-input";
 import { Formik, FormikHelpers } from "formik";
+
+import { AttributedSearchInput } from "./search-input";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
-import { RouteContext } from "../App";
 import { RouteSearchService } from "../services/route-search-service";
+import { Route } from "../interfaces/route";
 
 interface RouteSearchFormProps {
-    onSearchSubmitted: () => unknown;
+    onSearchSubmitted: (route: Route) => unknown;
 }
 
 interface ErrorContainerProps {
@@ -35,7 +36,6 @@ const ErrorContainer = (props: ErrorContainerProps) => {
 };
 
 export const RouteSearchForm = (props: RouteSearchFormProps) => {
-    const { setRoute } = React.useContext(RouteContext);
     const [routeSearch, setRouteSearch] = React.useState<RouteSearch>({
         from: null,
         to: null,
@@ -71,9 +71,7 @@ export const RouteSearchForm = (props: RouteSearchFormProps) => {
 
         const route = await new RouteSearchService().performSearch(values);
 
-        setRoute(route);
-
-        props.onSearchSubmitted();
+        props.onSearchSubmitted(route);
 
         // todo: perform the search or use a reducer to do so?
         setSubmitting(false);
