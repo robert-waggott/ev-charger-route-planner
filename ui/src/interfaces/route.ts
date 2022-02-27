@@ -2,7 +2,7 @@ import { LineString } from "geojson";
 
 export interface Route {
     summary: string;
-    duration: number;
+    durationInMinutes: number;
     geometry: LineString;
     numberOfSteps: number;
     distanceInMeters: number;

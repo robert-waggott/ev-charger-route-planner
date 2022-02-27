@@ -7,7 +7,7 @@ import { LocationSearchResponse } from "src/interfaces/location-search-response.
 
 @Injectable()
 export class RouteSearchService {
-    async getDrivingRoute(routeSearchRequest: RouteSearchRequestDto): Promise<DrivingRouteResponse[]> {
+    async getDrivingRoutes(routeSearchRequest: RouteSearchRequestDto): Promise<DrivingRouteResponse[]> {
         const params: [string, string][] = [
             ["access_token", process.env.MAPBOXAPIKEY],
             ["alternatives", "true"],

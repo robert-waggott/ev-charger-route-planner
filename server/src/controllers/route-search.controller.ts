@@ -9,7 +9,7 @@ export class RouteSearchController {
 
     @Post()
     async post(@Body() request: RouteSearchRequestDto): Promise<DrivingRouteResponse[]> {
-        const response = this.routeSearchService.getDrivingRoute(request);
+        const response = this.routeSearchService.getDrivingRoutes(request);
 
         return response;
     }

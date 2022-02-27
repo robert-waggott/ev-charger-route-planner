@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Container } from "react-bootstrap";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { RouteSearchForm } from "./route-search-form";
 import { Route } from "../interfaces/route";
