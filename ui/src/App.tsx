@@ -41,10 +41,16 @@ function App() {
     return (
         <div className="App">
             <ConfigContext.Provider value={{ config, setConfig }}>
-                <SearchSidebar onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)} />
+                <SearchSidebar
+                    selectedRoute={selectedRoute}
+                    onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)}
+                />
                 <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
-                <AvailableRoutesModal possibleRoutes={possibleRoutes} />
+                <AvailableRoutesModal
+                    possibleRoutes={possibleRoutes}
+                    onChooseRoute={(route) => setSelectedRoute(route)}
+                />
             </ConfigContext.Provider>
         </div>
     );

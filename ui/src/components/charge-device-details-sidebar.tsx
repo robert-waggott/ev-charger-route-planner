@@ -25,6 +25,8 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
 
+    const chargeDeviceLocation = props.chargeDevice?.ChargeDeviceLocation;
+
     React.useEffect(() => {
         if (config && chargeDeviceLocation) {
             mapRef.current = new maplibregl.Map({
@@ -38,9 +40,7 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
                 .setLngLat([chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude])
                 .addTo(mapRef.current);
         }
-    }, [config]);
-
-    const chargeDeviceLocation = props.chargeDevice?.ChargeDeviceLocation;
+    }, [config, chargeDeviceLocation]);
 
     if (!chargeDeviceLocation || !chargeDeviceLocation.Latitude || !chargeDeviceLocation.Longitude) {
         return <></>;

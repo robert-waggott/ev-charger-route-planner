@@ -25,18 +25,18 @@ const MapContainerDiv = styled.div`
     width: 100%;
 `;
 
-export const MappedRoute = (props: MappedRouteProps) => {
-    async function mapRoute() {
-        if (props.route) {
-            await new RouteBuildingService(props.route, props.map, (chargeDevice) => {
-                props.onChargeDeviceChanged(chargeDevice);
-            }).mapRoute();
-        }
-    }
-
+export const MappedRoute = ({ route, map, onChargeDeviceChanged }: MappedRouteProps) => {
     React.useEffect(() => {
+        const mapRoute = async () => {
+            if (route) {
+                await new RouteBuildingService(route, map, (chargeDevice) => {
+                    onChargeDeviceChanged(chargeDevice);
+                }).mapRoute();
+            }
+        };
+
         mapRoute();
-    }, [props.route]);
+    }, [route, map, onChargeDeviceChanged]);
 
     return <></>;
 };

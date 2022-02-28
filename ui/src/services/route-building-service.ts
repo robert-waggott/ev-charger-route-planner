@@ -1,16 +1,8 @@
-import {
-    LngLatBounds,
-    LngLatLike,
-    Map,
-    MapboxGeoJSONFeature,
-    MapLayerMouseEvent,
-    MapMouseEvent,
-    Popup
-} from "maplibre-gl";
+import { LngLatBounds, LngLatLike, Map, MapLayerMouseEvent } from "maplibre-gl";
 import { Route } from "../interfaces/route";
 import { Feature, Point, Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
-import { ChargeDevice, ChargeDeviceLocation } from "../interfaces/charge-points-response";
+import { ChargeDevice } from "../interfaces/charge-points-response";
 
 export class RouteBuildingService {
     chargingPointsService: ChargingPointsService;

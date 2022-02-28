@@ -7,7 +7,6 @@ import { Formik, FormikHelpers } from "formik";
 import { AttributedSearchInput } from "./search-input";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
 import { RouteSearchService } from "../services/route-search-service";
-import { Route } from "../interfaces/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
 
 interface RouteSearchFormProps {

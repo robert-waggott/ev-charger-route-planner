@@ -2,11 +2,11 @@ import React, { MutableRefObject } from "react";
 import { Container, Modal, Row, Col, Card, Badge } from "react-bootstrap";
 import styled from "styled-components";
 import moment from "moment";
+import maplibregl from "maplibre-gl";
 
 import { Route } from "../interfaces/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
 import { ConfigContext } from "../App";
-import maplibregl from "maplibre-gl";
 import { RouteBuildingService } from "../services/route-building-service";
 
 interface DetailsMapProps {
@@ -36,13 +36,14 @@ const DetailsMap = (props: DetailsMapProps) => {
                 await new RouteBuildingService(props.route, mapRef.current).mapRoute();
             });
         }
-    }, [config]);
+    }, [config, props.route]);
 
     return <MapContainerDiv ref={mapContainerRef} />;
 };
 
 interface PossibleRouteProps {
     route: Route;
+    onChooseRoute: (route: Route) => unknown;
 }
 
 const StyledBadge = styled(Badge)`
@@ -79,7 +80,9 @@ const PossibleRouteCard = (props: PossibleRouteProps) => {
                             Duration: <strong>{formattedDuration}</strong>
                         </StyledBadge>
                     </Card.Text>
-                    <Card.Link href="#">Choose this route</Card.Link>
+                    <Card.Link href="#" onClick={() => props.onChooseRoute(props.route)}>
+                        Choose this route
+                    </Card.Link>
                 </Card.Body>
             </Card>
         </Col>
@@ -88,10 +91,16 @@ const PossibleRouteCard = (props: PossibleRouteProps) => {
 
 interface PossibleRoutesModalProps {
     possibleRoutes: PossibleRoutes | null;
+    onChooseRoute: (route: Route) => unknown;
 }
 
 export const AvailableRoutesModal = (props: PossibleRoutesModalProps) => {
     const [show, setShow] = React.useState(false);
+
+    const onChooseRoute = (route: Route) => {
+        props.onChooseRoute(route);
+        setShow(false);
+    };
 
     React.useEffect(() => {
         setShow(props.possibleRoutes ? true : false);
@@ -110,7 +119,9 @@ export const AvailableRoutesModal = (props: PossibleRoutesModalProps) => {
                 <Container fluid>
                     <Row>
                         {props.possibleRoutes && props.possibleRoutes.routes ? (
-                            props.possibleRoutes.routes.map((route) => <PossibleRouteCard route={route} />)
+                            props.possibleRoutes.routes.map((route) => (
+                                <PossibleRouteCard route={route} onChooseRoute={onChooseRoute} />
+                            ))
                         ) : (
                             <></>
                         )}

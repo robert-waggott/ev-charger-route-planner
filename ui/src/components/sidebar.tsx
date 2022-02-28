@@ -10,6 +10,7 @@ import { Route } from "../interfaces/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
 
 export interface SidebarProps {
+    selectedRoute: Route | null;
     onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
 }
 
@@ -30,9 +31,14 @@ export const SearchSidebar = (props: SidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
 
     const onSearchSubmitted = (possibleRoutes: PossibleRoutes) => {
-        setExpanded(false);
         props.onSearchSubmitted(possibleRoutes);
     };
+
+    React.useEffect(() => {
+        if (props.selectedRoute) {
+            setExpanded(false);
+        }
+    }, [props.selectedRoute]);
 
     return (
         <>

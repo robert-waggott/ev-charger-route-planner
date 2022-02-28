@@ -36,11 +36,11 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Open EV charger details in right hand side panel
 -   [x] EV charger details map in right hand side panel
 -   [x] Sort out `from` and `to` field attribution tooltips
+-   [x] Ability to choose between different routes
+-   [x] Keep search panel open until route has been selected
 
 ## Todo
 
--   [ ] Ability to choose between different routes
--   [ ] Keep search panel open until route has been selected
 -   [ ] Map incidents
 -   [ ] Display instructions
 -   [ ] Create/implement the EV algorithm
