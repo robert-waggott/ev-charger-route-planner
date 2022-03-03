@@ -2,10 +2,10 @@ import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Col, Container, Row } from "react-bootstrap";
+import maplibregl from "maplibre-gl";
 
 import { ChargeDevice } from "../interfaces/charge-points-response";
 import { ConfigContext } from "../App";
-import maplibregl from "maplibre-gl";
 
 const MapContainerDiv = styled.div`
     width: 100%;
