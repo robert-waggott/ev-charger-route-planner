@@ -3,13 +3,12 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Container } from "react-bootstrap";
-import { ErrorBoundary } from "react-error-boundary";
 
 import { RouteSearchForm } from "./route-search-form";
 import { Route } from "../interfaces/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
 
-export interface SidebarProps {
+interface SearchSidebarProps {
     selectedRoute: Route | null;
     onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
 }
@@ -27,7 +26,7 @@ const StyledExpandButton = styled.button`
     cursor: pointer;
 `;
 
-export const SearchSidebar = (props: SidebarProps) => {
+export const SearchSidebar = (props: SearchSidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
 
     const onSearchSubmitted = (possibleRoutes: PossibleRoutes) => {

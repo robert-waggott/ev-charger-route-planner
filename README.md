@@ -43,6 +43,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 -   [ ] Map incidents
 -   [ ] Add ability to save routes - use local storage for the time being
+-   [ ] Host the service in azure
 -   [ ] Display instructions
 -   [ ] Create/implement the EV algorithm
 

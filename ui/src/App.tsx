@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 
 import { FullScreenMap } from "./components/full-screen-map";
-import { SearchSidebar } from "./components/sidebar";
+import { SearchSidebar } from "./components/search-sidebar";
 import { Route } from "./interfaces/route";
 import { Config } from "./interfaces/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";
@@ -9,6 +9,7 @@ import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-s
 import { ConfigService } from "./services/config-service";
 import { AvailableRoutesModal } from "./components/available-routes";
 import { PossibleRoutes } from "./interfaces/possible-routes";
+import { RouteDetailsSidebar } from "./components/route-details-sidebar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -45,6 +46,7 @@ function App() {
                     selectedRoute={selectedRoute}
                     onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)}
                 />
+                <RouteDetailsSidebar selectedRoute={selectedRoute} />
                 <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
                 <AvailableRoutesModal
