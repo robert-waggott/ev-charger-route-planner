@@ -2,12 +2,36 @@ import React from "react";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Modal } from "react-bootstrap";
 import moment from "moment";
 
 import { Route } from "../interfaces/route";
 import { useLocalStorage } from "../hooks/use-local-storage";
 import { SavedRoute } from "../interfaces/saved-route";
+
+interface SavedRouteModalProps {
+    savedRoute: SavedRoute | null;
+}
+
+const SavedRouteModal = (props: SavedRouteModalProps) => {
+    // const [savedRoutes, setSavedRoutes] = useLocalStorage<SavedRoute[]>("savedRoutes");
+    const [show, setShow] = React.useState(false);
+
+    React.useEffect(() => {}, [props.savedRoute]);
+
+    return (
+        <Modal show={show} onHide={() => setShow(false)} backdrop="static" size="lg" keyboard={false}>
+            <Modal.Header closeButton>
+                <Modal.Title>Save Route</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Container fluid>
+                    <Row></Row>
+                </Container>
+            </Modal.Body>
+        </Modal>
+    );
+};
 
 interface RouteDetailsProps {
     selectedRoute: Route | null;
@@ -28,26 +52,18 @@ const StyledExpandButton = styled.button`
 
 export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(true);
-    const [savedRoutes, setSavedRoutes] = useLocalStorage<SavedRoute[]>("savedRoutes");
+    const [savedRoute, setSavedRoute] = React.useState<SavedRoute | null>(null);
 
     if (!props.selectedRoute) {
         return <></>;
     }
 
     const saveRoute = () => {
-        const savedRoute = {
+        setSavedRoute({
             name: "",
             savedOn: moment(),
             route: props.selectedRoute!
-        };
-
-        if (!savedRoutes) {
-            setSavedRoutes([savedRoute]);
-            return;
-        }
-
-        savedRoutes.push(savedRoute);
-        setSavedRoutes(savedRoutes);
+        });
     };
 
     return (
@@ -72,6 +88,8 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>
+
+            <SavedRouteModal savedRoute={savedRoute} />
         </>
     );
 };
