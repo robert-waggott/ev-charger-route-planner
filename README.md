@@ -38,12 +38,15 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Sort out `from` and `to` field attribution tooltips
 -   [x] Ability to choose between different routes
 -   [x] Keep search panel open until route has been selected
+-   [x] Add ability to save routes - use local storage for the time being
 
 ## Todo
 
+-   [ ] Name saved routes
+-   [ ] Ability to overwrite/replace saved routes
+-   [ ] Retrieve saved routes
 -   [ ] Map incidents
--   [ ] Add ability to save routes - use local storage for the time being
--   [ ] Host the service in azure
+-   [ ] Host the service
 -   [ ] Display instructions
 -   [ ] Create/implement the EV algorithm
 
