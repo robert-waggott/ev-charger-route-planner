@@ -42,6 +42,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 ## Todo
 
 -   [ ] Map incidents
+-   [ ] Add ability to save routes - use local storage for the time being
 -   [ ] Display instructions
 -   [ ] Create/implement the EV algorithm
 
