@@ -8,32 +8,16 @@ import { AttributedSearchInput } from "./search-input";
 import { ChargeDistanceType, RouteSearch } from "../interfaces/route-search";
 import { RouteSearchService } from "../services/route-search-service";
 import { PossibleRoutes } from "../interfaces/possible-routes";
+import { ErrorContainer } from "./error-container";
 
 interface RouteSearchFormProps {
     onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
-}
-
-interface ErrorContainerProps {
-    error?: string;
 }
 
 const StyledButtonContainer = styled(Form.Group)`
     text-align: right;
     margin-top: 20px;
 `;
-
-const StyledErrorMessageContainer = styled.div`
-    margin-top: 5px;
-    color: red;
-`;
-
-const ErrorContainer = (props: ErrorContainerProps) => {
-    if (props.error) {
-        return <StyledErrorMessageContainer>{props.error}</StyledErrorMessageContainer>;
-    }
-
-    return <></>;
-};
 
 export const RouteSearchForm = (props: RouteSearchFormProps) => {
     const [routeSearch, setRouteSearch] = React.useState<RouteSearch>({

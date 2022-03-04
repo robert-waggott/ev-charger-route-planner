@@ -7,7 +7,7 @@ function getLocalStorageValue<T>(key: string, defaultValue: T) {
         return defaultValue;
     }
 
-    return <T>JSON.parse(saved);
+    return JSON.parse(saved) as T;
 }
 
 export function useLocalStorage<T>(key: string, defaultValue?: T | null) {
