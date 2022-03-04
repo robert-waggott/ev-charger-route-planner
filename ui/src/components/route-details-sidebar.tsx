@@ -14,10 +14,14 @@ interface SavedRouteModalProps {
 }
 
 const SavedRouteModal = (props: SavedRouteModalProps) => {
-    // const [savedRoutes, setSavedRoutes] = useLocalStorage<SavedRoute[]>("savedRoutes");
+    const [savedRoutes, setSavedRoutes] = useLocalStorage<SavedRoute[]>("savedRoutes");
     const [show, setShow] = React.useState(false);
 
-    React.useEffect(() => {}, [props.savedRoute]);
+    React.useEffect(() => {
+        if (props.savedRoute) {
+            setShow(true);
+        }
+    }, [props.savedRoute]);
 
     return (
         <Modal show={show} onHide={() => setShow(false)} backdrop="static" size="lg" keyboard={false}>
