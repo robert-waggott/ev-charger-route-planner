@@ -42,6 +42,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## Todo
 
+-   [ ] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
 -   [ ] Name saved routes
 -   [ ] Ability to overwrite/replace saved routes
 -   [ ] Retrieve saved routes
