@@ -49,6 +49,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Map incidents
 -   [ ] Host the service
 -   [ ] Display instructions
+-   [ ] Ability to change map tiles
 -   [ ] Create/implement the EV algorithm
 
 ## Nice to have
