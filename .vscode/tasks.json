@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run SPA startup",
+            "type": "shell",
+            "command": "cd ui && npm start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "runOptions": { "runOn": "folderOpen" }
+        },
+        {
+            "label": "Run Server",
+            "type": "shell",
+            "command": "cd server && npm run start:dev",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "runOptions": { "runOn": "folderOpen" }
+        }
+    ]
+}
