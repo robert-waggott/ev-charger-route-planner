@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run SPA startup",
+            "label": "Run UI",
             "type": "shell",
             "command": "cd ui && npm start",
             "presentation": {
@@ -10,7 +10,10 @@
                 "panel": "new",
                 "group": "develop"
             },
-            "runOptions": { "runOn": "folderOpen" }
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
         },
         {
             "label": "Run Server",
@@ -21,7 +24,10 @@
                 "panel": "new",
                 "group": "develop"
             },
-            "runOptions": { "runOn": "folderOpen" }
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
         }
     ]
 }

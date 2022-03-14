@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { Button, Col, Container, Row, Modal, Form } from "react-bootstrap";
+import { Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
 import moment from "moment";
 
 import { Route } from "../interfaces/route";
@@ -47,8 +47,7 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
 
         if (!savedRoutes) {
             setSavedRoutes([namedSavedRoute!]);
-        }
-        else {
+        } else {
             savedRoutes.push(namedSavedRoute!);
             setSavedRoutes(savedRoutes);
         }
@@ -98,6 +97,37 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
                             <strong>Or overwrite an existing route...</strong>
                         </Col>
                     </Row>
+
+                    {savedRoutes ? (
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Saved On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {savedRoutes.map((route, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{route.name}</td>
+                                            <td>{moment(route.savedOn).format("dddd Do MMM YYYY HH:mm")}</td>
+                                            <td>
+                                                <Button size="sm" variant="secondary" type="button">
+                                                    Replace
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                    ) : (
+                        <></>
+                    )}
                 </Container>
             </Modal.Body>
             <Modal.Footer>
