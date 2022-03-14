@@ -40,17 +40,19 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Keep search panel open until route has been selected
 -   [x] Add ability to save routes - use local storage for the time being
 -   [x] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
+-   [x] Name saved routes
 
 ## Todo
 
--   [ ] Name saved routes
 -   [ ] Ability to overwrite/replace saved routes
+-   [ ] Use reducer for saved routes
 -   [ ] Retrieve saved routes
 -   [ ] Map incidents
 -   [ ] Host the service
 -   [ ] Display instructions
 -   [ ] Ability to change map tiles
 -   [ ] Create/implement the EV algorithm
+-   [ ] Replace this with a trello board!
 
 ## Nice to have
 
