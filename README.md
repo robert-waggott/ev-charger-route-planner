@@ -41,10 +41,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Add ability to save routes - use local storage for the time being
 -   [x] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
 -   [x] Name saved routes
+-   [x] Ability to overwrite/replace saved routes
 
 ## Todo
 
--   [ ] Ability to overwrite/replace saved routes
 -   [ ] Use reducer for saved routes
 -   [ ] Retrieve saved routes
 -   [ ] Map incidents

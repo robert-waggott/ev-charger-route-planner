@@ -42,7 +42,8 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
 
         return errors;
     };
-    const onSubmit = async (namedSavedRoute: SavedRoute, { setSubmitting }: FormikHelpers<SavedRoute>) => {
+
+    const onSubmit = (namedSavedRoute: SavedRoute, { setSubmitting }: FormikHelpers<SavedRoute>) => {
         setSavedRoute(namedSavedRoute);
 
         if (!savedRoutes) {
@@ -53,6 +54,12 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
         }
 
         setSubmitting(false);
+        setShow(false);
+    };
+
+    const onReplaceRoute = (index: number) => {
+        savedRoutes![index] = savedRoute!;
+        setSavedRoutes(savedRoutes);
         setShow(false);
     };
 
@@ -116,7 +123,12 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
                                             <td>{route.name}</td>
                                             <td>{moment(route.savedOn).format("dddd Do MMM YYYY HH:mm")}</td>
                                             <td>
-                                                <Button size="sm" variant="secondary" type="button">
+                                                <Button
+                                                    size="sm"
+                                                    variant="secondary"
+                                                    type="button"
+                                                    onClick={() => onReplaceRoute(index)}
+                                                >
                                                     Replace
                                                 </Button>
                                             </td>
