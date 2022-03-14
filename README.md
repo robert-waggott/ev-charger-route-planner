@@ -39,10 +39,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Ability to choose between different routes
 -   [x] Keep search panel open until route has been selected
 -   [x] Add ability to save routes - use local storage for the time being
+-   [x] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
 
 ## Todo
 
--   [ ] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
 -   [ ] Name saved routes
 -   [ ] Ability to overwrite/replace saved routes
 -   [ ] Retrieve saved routes
