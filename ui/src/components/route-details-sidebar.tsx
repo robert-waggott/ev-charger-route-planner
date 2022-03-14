@@ -42,16 +42,19 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
 
         return errors;
     };
-    const onSubmit = async (values: SavedRoute, { setSubmitting }: FormikHelpers<SavedRoute>) => {
-        setSavedRoute(values);
+    const onSubmit = async (namedSavedRoute: SavedRoute, { setSubmitting }: FormikHelpers<SavedRoute>) => {
+        setSavedRoute(namedSavedRoute);
 
-        // props.onSearchSubmitted({
-        //     from: values.from!.name,
-        //     to: values.to!.name,
-        //     routes: routes
-        // });
+        if (!savedRoutes) {
+            setSavedRoutes([namedSavedRoute!]);
+        }
+        else {
+            savedRoutes.push(namedSavedRoute!);
+            setSavedRoutes(savedRoutes);
+        }
 
         setSubmitting(false);
+        setShow(false);
     };
 
     return (
