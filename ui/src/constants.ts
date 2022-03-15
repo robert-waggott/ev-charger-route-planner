@@ -1,0 +1,1 @@
+export const savedRoutesKey = "savedRoutes";

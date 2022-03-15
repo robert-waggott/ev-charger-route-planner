@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
+import { Offcanvas, Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
+import { Formik, FormikHelpers } from "formik";
 import moment from "moment";
 
 import { Route } from "../interfaces/route";
-import { useLocalStorage } from "../hooks/use-local-storage";
+import { SavedRoutesReducer } from "./saved-routes-reducer";
+import { getLocalStorageValue, setLocalStorageValue } from "../hooks/use-local-storage";
 import { SavedRoute } from "../interfaces/saved-route";
-import { Formik, FormikHelpers } from "formik";
 import { ErrorContainer } from "./error-container";
+import { savedRoutesKey } from "../constants";
 
 interface SavedRouteModalProps {
     savedRoute: SavedRoute | null;
@@ -20,16 +21,21 @@ const StyledSaveButtonContainer = styled(Col)`
 `;
 
 const SavedRouteModal = (props: SavedRouteModalProps) => {
-    const [savedRoute, setSavedRoute] = React.useState<SavedRoute | null>(null);
-    const [savedRoutes, setSavedRoutes] = useLocalStorage<SavedRoute[]>("savedRoutes");
+    const [savedRoutes, dispatchSavedRoutes] = React.useReducer(SavedRoutesReducer, [], () => {
+        return getLocalStorageValue<SavedRoute[] | null>(savedRoutesKey, null);
+    });
+
     const [show, setShow] = React.useState(false);
 
     React.useEffect(() => {
         if (props.savedRoute) {
-            setSavedRoute(props.savedRoute);
             setShow(true);
         }
     }, [props.savedRoute]);
+
+    React.useEffect(() => {
+        setLocalStorageValue(savedRoutesKey, savedRoutes);
+    }, [savedRoutes]);
 
     const validate = (values: SavedRoute) => {
         const errors: {
@@ -44,22 +50,22 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
     };
 
     const onSubmit = (namedSavedRoute: SavedRoute, { setSubmitting }: FormikHelpers<SavedRoute>) => {
-        setSavedRoute(namedSavedRoute);
-
-        if (!savedRoutes) {
-            setSavedRoutes([namedSavedRoute!]);
-        } else {
-            savedRoutes.push(namedSavedRoute!);
-            setSavedRoutes(savedRoutes);
-        }
+        dispatchSavedRoutes({
+            type: "add",
+            routeToAddOrReplace: namedSavedRoute
+        });
 
         setSubmitting(false);
         setShow(false);
     };
 
     const onReplaceRoute = (index: number) => {
-        savedRoutes![index] = savedRoute!;
-        setSavedRoutes(savedRoutes);
+        dispatchSavedRoutes({
+            type: "replace",
+            routeToAddOrReplace: props.savedRoute!,
+            indexToReplace: index
+        });
+
         setShow(false);
     };
 
@@ -76,7 +82,7 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
                         </Col>
                     </Row>
 
-                    <Formik initialValues={savedRoute!} validate={validate} onSubmit={onSubmit}>
+                    <Formik initialValues={props.savedRoute!} validate={validate} onSubmit={onSubmit}>
                         {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
                             <Form onSubmit={handleSubmit} spellCheck="false">
                                 <Row>
