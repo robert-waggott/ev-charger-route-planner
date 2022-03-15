@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { Toaster } from "react-hot-toast";
 
 import { FullScreenMap } from "./components/full-screen-map";
 import { SearchSidebar } from "./components/search-sidebar";
@@ -10,9 +11,9 @@ import { ConfigService } from "./services/config-service";
 import { AvailableRoutesModal } from "./components/available-routes";
 import { PossibleRoutes } from "./interfaces/possible-routes";
 import { RouteDetailsSidebar } from "./components/route-details-sidebar";
+import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -43,6 +44,8 @@ function App() {
     return (
         <div className="App">
             <ConfigContext.Provider value={{ config, setConfig }}>
+                <Toaster position="top-right" />
+
                 <SearchSidebar
                     selectedRoute={selectedRoute}
                     onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)}

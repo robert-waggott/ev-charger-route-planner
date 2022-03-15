@@ -1,8 +1,9 @@
-import React, { useReducer } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
 import { Offcanvas, Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
 import { Formik, FormikHelpers } from "formik";
+import toast from "react-hot-toast";
 import moment from "moment";
 
 import { Route } from "../interfaces/route";
@@ -54,6 +55,7 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
             type: "add",
             routeToAddOrReplace: namedSavedRoute
         });
+        toast.success("Route saved");
 
         setSubmitting(false);
         setShow(false);
@@ -65,6 +67,7 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
             routeToAddOrReplace: props.savedRoute!,
             indexToReplace: index
         });
+        toast.success("Route replaced");
 
         setShow(false);
     };
