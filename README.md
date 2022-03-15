@@ -42,7 +42,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] https://hinty.io/ivictbor/autostart-multiple-commands-in-vscode-terminal/
 -   [x] Name saved routes
 -   [x] Ability to overwrite/replace saved routes
--   [ ] Use reducer for saved routes
+-   [x] Use reducer for saved routes
 
 ## In progress
 
@@ -50,7 +50,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## Todo
 
--   [ ] Add in a toast when a route has been saved -> https://www.npmjs.com/package/react-toast-notifications
+-   [ ] Add in a toast when a route has been saved -> https://react-hot-toast.com/
 -   [ ] Map incidents
 -   [ ] Display instructions
 -   [ ] Ability to change map tiles
