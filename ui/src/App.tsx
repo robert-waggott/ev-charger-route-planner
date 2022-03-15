@@ -12,6 +12,7 @@ import { PossibleRoutes } from "./interfaces/possible-routes";
 import { RouteDetailsSidebar } from "./components/route-details-sidebar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -51,8 +52,9 @@ function App() {
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
                 <AvailableRoutesModal
                     possibleRoutes={possibleRoutes}
-                    onChooseRoute={(route) => setSelectedRoute(route)}
+                    onRouteChosen={(route) => setSelectedRoute(route)}
                 />
+                <OpenSavedRouteModal onRouteChosen={(route) => setSelectedRoute(route)} />
             </ConfigContext.Provider>
         </div>
     );
