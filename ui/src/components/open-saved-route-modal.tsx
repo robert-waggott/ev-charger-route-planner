@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Modal, Row } from "react-bootstrap";
+import { Button, Container, Modal, Row } from "react-bootstrap";
 
 import { useLocalStorage } from "../hooks/use-local-storage";
 import { Route } from "../interfaces/route";
@@ -23,6 +23,11 @@ export const OpenSavedRouteModal = (props: OpenSavedRouteModalProps) => {
         return <></>;
     }
 
+    const onRouteChosen = (route: Route) => {
+        setShow(false);
+        props.onRouteChosen(route);
+    };
+
     return (
         <Modal show={show} onHide={() => setShow(false)} backdrop="static" size="xl" keyboard={true}>
             <Modal.Header closeButton>
@@ -32,11 +37,16 @@ export const OpenSavedRouteModal = (props: OpenSavedRouteModalProps) => {
                 <Container fluid>
                     <Row>
                         {savedRoutes.map((savedRoute) => (
-                            <PossibleRouteCard route={savedRoute.route} onRouteChosen={props.onRouteChosen} />
+                            <PossibleRouteCard route={savedRoute.route} onRouteChosen={onRouteChosen} />
                         ))}
                     </Row>
                 </Container>
             </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShow(false)}>
+                    Close
+                </Button>
+            </Modal.Footer>
         </Modal>
     );
 };

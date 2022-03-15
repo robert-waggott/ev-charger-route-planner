@@ -43,14 +43,14 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Name saved routes
 -   [x] Ability to overwrite/replace saved routes
 -   [x] Use reducer for saved routes
+-   [x] Retrieve saved routes and allow them be opened on page load
 
 ## In progress
 
--   [ ] Retrieve saved routes and allow them be opened on page load
+-   [ ] Add in a toast when a route has been saved -> https://react-hot-toast.com/
 
 ## Todo
 
--   [ ] Add in a toast when a route has been saved -> https://react-hot-toast.com/
 -   [ ] Refactor maptiler url so it's shared across components
 -   [ ] Map incidents
 -   [ ] Display instructions
