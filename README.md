@@ -54,6 +54,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## Todo
 
+-   [ ] Refactor tests to use https://www.npmjs.com/package/axios-mock-adapter
 -   [ ] Map incidents
 -   [ ] Display instructions
 -   [ ] Print instructions
