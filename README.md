@@ -47,6 +47,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Add in a toast when a route has been saved -> https://react-hot-toast.com/
 -   [x] Refactor maptiler url so it's shared across components
 -   [x] Extend startup tasks to run `npm test`
+-   [x] Refactor tests to use nock
 
 ## In progress
 
@@ -54,7 +55,6 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## Todo
 
--   [ ] Refactor tests to use https://www.npmjs.com/package/axios-mock-adapter
 -   [ ] Map incidents
 -   [ ] Display instructions
 -   [ ] Print instructions

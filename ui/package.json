@@ -30,7 +30,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test"
+        "test": "react-scripts test",
+        "test:coverage": "react-scripts test --coverage --no-cache --watchAll"
     },
     "eslintConfig": {
         "extends": [
@@ -57,5 +58,22 @@
         "@types/react-bootstrap-typeahead": "^5.1.7",
         "@types/styled-components": "^5.1.11",
         "nock": "^13.2.4"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/**/*.{ts,tsx}",
+            "!<rootDir>/node_modules/"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 90,
+                "functions": 90,
+                "lines": 90,
+                "statements": 90
+            }
+        },
+        "coverageReporters": [
+            "text"
+        ]
     }
 }
