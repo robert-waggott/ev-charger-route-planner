@@ -24,7 +24,7 @@ export const RouteDetailMap = (props: RouteDetailMapProps) => {
         if (config) {
             mapRef.current = new maplibregl.Map({
                 container: mapContainerRef.current,
-                style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`, // todo - refactor...
+                style: config.mapTilerURL,
                 center: [-1.605333, 52.890665],
                 zoom: 5
             });

@@ -45,18 +45,21 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Use reducer for saved routes
 -   [x] Retrieve saved routes and allow them be opened on page load
 -   [x] Add in a toast when a route has been saved -> https://react-hot-toast.com/
+-   [x] Refactor maptiler url so it's shared across components
+-   [x] Extend startup tasks to run `npm test`
 
 ## In progress
 
--   [ ] Refactor maptiler url so it's shared across components
 -   [ ] Ability to change map tiles
 
 ## Todo
 
 -   [ ] Map incidents
 -   [ ] Display instructions
+-   [ ] Print instructions
 -   [ ] Create/implement the EV algorithm
--   [ ] Extend startup tasks to run `npm test`
+-   [ ] Change route styling and add option in UI to change it
+-   [ ] Change UX of how a search can be run
 
 ## Nice to have
 

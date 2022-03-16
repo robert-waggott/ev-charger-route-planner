@@ -1,1 +1,8 @@
-{}
+{
+  "dependencies": {
+    "class-transformer": "^0.5.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.0.0"
+  }
+}

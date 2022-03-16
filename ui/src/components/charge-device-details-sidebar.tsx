@@ -31,7 +31,7 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
         if (config && chargeDeviceLocation) {
             mapRef.current = new maplibregl.Map({
                 container: mapContainerRef.current,
-                style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
+                style: config.mapTilerURL,
                 center: [chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude],
                 zoom: 15
             });

@@ -16,6 +16,20 @@
             "problemMatcher": []
         },
         {
+            "label": "Run UI Tests",
+            "type": "shell",
+            "command": "cd ui && npm test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "develop"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Run Server",
             "type": "shell",
             "command": "cd server && npm run start:dev",

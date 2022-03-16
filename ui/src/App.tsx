@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { FullScreenMap } from "./components/full-screen-map";
 import { SearchSidebar } from "./components/search-sidebar";
 import { Route } from "./interfaces/route";
-import { Config } from "./interfaces/config";
+import { Config } from "./classes/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";
 import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-sidebar";
 import { ConfigService } from "./services/config-service";

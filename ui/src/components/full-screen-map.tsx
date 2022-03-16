@@ -50,7 +50,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
         if (config) {
             mapRef.current = new maplibregl.Map({
                 container: mapContainerRef.current,
-                style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
+                style: config.mapTilerURL,
                 center: [-1.631291, 52.48278],
                 zoom: 4
             });
