@@ -1,6 +1,5 @@
 import { LocationSearchResponse } from "../interfaces/search-result";
 import { LocationSearchService } from "./location-search-service";
-import { ConfigService } from "./config-service";
 import { faker } from "@faker-js/faker";
 import nock from "nock";
 
