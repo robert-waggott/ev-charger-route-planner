@@ -56,6 +56,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 ## Todo
 
 -   [ ] Map incidents
+-   [ ] Show range polygons around ev charging points
 -   [ ] Display instructions
 -   [ ] Print instructions
 -   [ ] Create/implement the EV algorithm
