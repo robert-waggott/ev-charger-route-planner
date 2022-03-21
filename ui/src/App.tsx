@@ -14,6 +14,7 @@ import { RouteDetailsSidebar } from "./components/route-details-sidebar";
 import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { SettingsCog } from "./components/settings";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -52,6 +53,7 @@ function App() {
                 />
                 <RouteDetailsSidebar selectedRoute={selectedRoute} />
                 <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
+                <SettingsCog />
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
                 <AvailableRoutesModal
                     possibleRoutes={possibleRoutes}
