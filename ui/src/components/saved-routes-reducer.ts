@@ -8,15 +8,15 @@ export const SavedRoutesReducer = (state: SavedRoute[] | null, action: SavedRout
             }
 
             state.push(action.routeToAddOrReplace);
-
-            return state;
+            break;
         }
         case "replace": {
             state![action.indexToReplace!] = action.routeToAddOrReplace;
-
-            return state;
+            break;
         }
     }
+
+    return [...state!] as SavedRoute[] | null;
 };
 
 interface SavedRoutesReducerAction {

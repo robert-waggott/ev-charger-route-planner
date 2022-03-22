@@ -18,19 +18,18 @@ const MapContainerDiv = styled.div`
 export const RouteDetailMap = (props: RouteDetailMapProps) => {
     const { config } = React.useContext(ConfigContext);
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
-    const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
 
     React.useEffect(() => {
         if (config) {
-            mapRef.current = new maplibregl.Map({
+            const map = new maplibregl.Map({
                 container: mapContainerRef.current,
                 style: config.mapTilerURL,
                 center: [-1.605333, 52.890665],
                 zoom: 5
             });
 
-            mapRef.current.on("load", async () => {
-                await new RouteBuildingService(props.route, mapRef.current).mapRoute();
+            map.on("load", async () => {
+                await new RouteBuildingService(props.route, map).mapRoute();
             });
         }
     }, [config, props.route]);

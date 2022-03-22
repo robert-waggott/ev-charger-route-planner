@@ -23,13 +23,12 @@ interface ChargeDeviceDetailsMapProps {
 export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
     const { config } = React.useContext(ConfigContext);
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
-    const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
 
     const chargeDeviceLocation = props.chargeDevice?.ChargeDeviceLocation;
 
     React.useEffect(() => {
         if (config && chargeDeviceLocation) {
-            mapRef.current = new maplibregl.Map({
+            const map = new maplibregl.Map({
                 container: mapContainerRef.current,
                 style: config.mapTilerURL,
                 center: [chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude],
@@ -38,7 +37,7 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
 
             new maplibregl.Marker()
                 .setLngLat([chargeDeviceLocation!.Longitude, chargeDeviceLocation!.Latitude])
-                .addTo(mapRef.current);
+                .addTo(map);
         }
     }, [config, chargeDeviceLocation]);
 
@@ -58,7 +57,7 @@ export const ChargeDeviceDetailsMap = (props: ChargeDeviceDetailsMapProps) => {
 export const ChargeDeviceDetailsSidebar = (props: ChargeDeviceDetailsSidebarProps) => {
     const [expanded, setExpanded] = React.useState<boolean>(false);
 
-    React.useEffect(() => {
+    React.useMemo(() => {
         if (props.chargeDevice) {
             setExpanded(true);
         }

@@ -33,7 +33,7 @@ export const SearchSidebar = (props: SearchSidebarProps) => {
         props.onSearchSubmitted(possibleRoutes);
     };
 
-    React.useEffect(() => {
+    React.useMemo(() => {
         if (props.selectedRoute) {
             setExpanded(false);
         }

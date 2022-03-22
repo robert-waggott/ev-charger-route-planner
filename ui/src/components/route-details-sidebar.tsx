@@ -22,19 +22,20 @@ const StyledSaveButtonContainer = styled(Col)`
 `;
 
 const SavedRouteModal = (props: SavedRouteModalProps) => {
-    const [savedRoutes, dispatchSavedRoutes] = React.useReducer(SavedRoutesReducer, [], () => {
-        return getLocalStorageValue<SavedRoute[] | null>(savedRoutesKey, null);
-    });
-
+    const [savedRoutes, dispatchSavedRoutes] = React.useReducer(
+        SavedRoutesReducer,
+        getLocalStorageValue<SavedRoute[] | null>(savedRoutesKey, null)
+    );
     const [show, setShow] = React.useState(false);
 
-    React.useEffect(() => {
+    React.useMemo(() => {
         if (props.savedRoute) {
             setShow(true);
         }
     }, [props.savedRoute]);
 
     React.useEffect(() => {
+        console.log("useEffect -> ", savedRoutes);
         setLocalStorageValue(savedRoutesKey, savedRoutes);
     }, [savedRoutes]);
 
