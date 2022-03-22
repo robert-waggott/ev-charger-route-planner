@@ -3,9 +3,11 @@ export class Config {
     TileOption: TileOption = TileOption.Streets;
 
     get mapTilerURL() {
-        const tileOption = TileOption[this.TileOption].toLowerCase();
+        return this.buildMapTilerURL(TileOption[this.TileOption]);
+    }
 
-        return `https://api.maptiler.com/maps/${tileOption}/style.json?key=${this.MapTilerAPIKey}`;
+    buildMapTilerURL(tileOption: string) {
+        return `https://api.maptiler.com/maps/${tileOption.toLowerCase()}/style.json?key=${this.MapTilerAPIKey}`;
     }
 }
 

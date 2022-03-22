@@ -1,8 +1,11 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import { Modal, Container, Button, Row, Col, Card } from "react-bootstrap";
 import { FaCog } from "react-icons/fa";
 import styled from "styled-components";
+
 import { TileOption } from "../classes/config";
+import { ConfigContext } from "../App";
+import maplibregl from "maplibre-gl";
 
 const StyledSettingsButton = styled.button`
     border: none;
@@ -17,8 +20,42 @@ const StyledSettingsButton = styled.button`
     cursor: pointer;
 `;
 
+const StyledCard = styled(Card)`
+    margin-bottom: 20px;
+`;
+
+const MapContainerDiv = styled.div`
+    width: 100%;
+    height: 150px;
+`;
+
+interface TileOptionMapProps {
+    tileOption: string;
+}
+
+const TileOptionMap = (props: TileOptionMapProps) => {
+    const { config } = React.useContext(ConfigContext);
+    const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+
+    React.useEffect(() => {
+        const map = new maplibregl.Map({
+            container: mapContainerRef.current,
+            style: config!.buildMapTilerURL(props.tileOption),
+            center: [-1.605333, 52.890665],
+            zoom: 5
+        });
+    }, []);
+
+    return <MapContainerDiv ref={mapContainerRef} />;
+};
+
 export const SettingsCog = () => {
     const [showSettings, setShowSettings] = React.useState(false);
+    const options = Object.keys(TileOption)
+        .map((option) => TileOption[parseInt(option)])
+        .filter((option) => option !== undefined);
+
+    console.log(options);
 
     return (
         <>
@@ -30,7 +67,7 @@ export const SettingsCog = () => {
                 show={showSettings}
                 onHide={() => setShowSettings(false)}
                 backdrop="static"
-                size="lg"
+                size="xl"
                 keyboard={false}
             >
                 <Modal.Header closeButton>
@@ -39,15 +76,17 @@ export const SettingsCog = () => {
                 <Modal.Body>
                     <Container fluid className="g-0">
                         <Row>
-                            {Object.values(TileOption).map((option) => (
+                            {options.map((option) => (
                                 <Col sm={4}>
-                                    <Card>
+                                    <StyledCard>
                                         <Card.Header>{option}</Card.Header>
                                         <Card.Body>
-                                            <Card.Text></Card.Text>
-                                            <Card.Link href="#">Choose this route</Card.Link>
+                                            <Card.Text>
+                                                <TileOptionMap tileOption={option} />
+                                            </Card.Text>
+                                            <Card.Link href="#">Choose this tile</Card.Link>
                                         </Card.Body>
-                                    </Card>
+                                    </StyledCard>
                                 </Col>
                             ))}
                         </Row>
