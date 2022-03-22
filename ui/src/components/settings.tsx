@@ -3,7 +3,7 @@ import { Modal, Container, Button, Row, Col, Card } from "react-bootstrap";
 import { FaCog } from "react-icons/fa";
 import styled from "styled-components";
 
-import { TileOption } from "../classes/config";
+import { Config, TileOption } from "../classes/config";
 import { ConfigContext } from "../App";
 import maplibregl from "maplibre-gl";
 
@@ -38,24 +38,34 @@ const TileOptionMap = (props: TileOptionMapProps) => {
     const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
 
     React.useEffect(() => {
-        const map = new maplibregl.Map({
+        new maplibregl.Map({
             container: mapContainerRef.current,
             style: config!.buildMapTilerURL(props.tileOption),
             center: [-1.605333, 52.890665],
             zoom: 5
         });
-    }, []);
+    });
 
     return <MapContainerDiv ref={mapContainerRef} />;
 };
 
 export const SettingsCog = () => {
+    const { config, setConfig } = React.useContext(ConfigContext);
     const [showSettings, setShowSettings] = React.useState(false);
     const options = Object.keys(TileOption)
         .map((option) => TileOption[parseInt(option)])
         .filter((option) => option !== undefined);
 
-    console.log(options);
+    const onTileChosen = (option: string) => {
+        const tileOption: TileOption = TileOption[option as keyof typeof TileOption];
+        const newConfig = new Config();
+
+        newConfig.MapTilerAPIKey = config!.MapTilerAPIKey;
+        newConfig.TileOption = tileOption;
+
+        setConfig(newConfig);
+        setShowSettings(false);
+    };
 
     return (
         <>
@@ -76,15 +86,17 @@ export const SettingsCog = () => {
                 <Modal.Body>
                     <Container fluid className="g-0">
                         <Row>
-                            {options.map((option) => (
+                            {options.map((option, index) => (
                                 <Col sm={4}>
                                     <StyledCard>
                                         <Card.Header>{option}</Card.Header>
                                         <Card.Body>
                                             <Card.Text>
-                                                <TileOptionMap tileOption={option} />
+                                                <TileOptionMap key={index} tileOption={option} />
                                             </Card.Text>
-                                            <Card.Link href="#">Choose this tile</Card.Link>
+                                            <Card.Link href="#" onClick={() => onTileChosen(option)}>
+                                                Choose this tile
+                                            </Card.Link>
                                         </Card.Body>
                                     </StyledCard>
                                 </Col>

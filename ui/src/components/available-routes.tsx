@@ -18,7 +18,7 @@ export const AvailableRoutesModal = (props: PossibleRoutesModalProps) => {
         setShow(false);
     };
 
-    React.useEffect(() => {
+    React.useMemo(() => {
         setShow(props.possibleRoutes ? true : false);
     }, [props.possibleRoutes]);
 

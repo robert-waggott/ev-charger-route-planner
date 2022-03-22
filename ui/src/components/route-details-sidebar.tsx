@@ -35,7 +35,6 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
     }, [props.savedRoute]);
 
     React.useEffect(() => {
-        console.log("useEffect -> ", savedRoutes);
         setLocalStorageValue(savedRoutesKey, savedRoutes);
     }, [savedRoutes]);
 

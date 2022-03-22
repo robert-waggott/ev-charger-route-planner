@@ -48,12 +48,16 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
 
     React.useEffect(() => {
         if (config) {
-            mapRef.current = new maplibregl.Map({
-                container: mapContainerRef.current,
-                style: config.mapTilerURL,
-                center: [-1.631291, 52.48278],
-                zoom: 4
-            });
+            if (mapRef.current) {
+                mapRef.current.setStyle(config.mapTilerURL);
+            } else {
+                mapRef.current = new maplibregl.Map({
+                    container: mapContainerRef.current,
+                    style: config.mapTilerURL,
+                    center: [-1.631291, 52.48278],
+                    zoom: 4
+                });
+            }
         }
     }, [config]);
 

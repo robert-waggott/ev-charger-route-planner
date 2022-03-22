@@ -29,8 +29,6 @@ export class RouteSearchService {
 
         const response = await axios.get(url);
 
-        console.log(response.data.routes[0].legs);
-
         const firstRoute = response.data.routes[0];
 
         return response.data.routes.map((route) => {

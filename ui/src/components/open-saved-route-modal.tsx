@@ -36,8 +36,8 @@ export const OpenSavedRouteModal = (props: OpenSavedRouteModalProps) => {
             <Modal.Body>
                 <Container fluid>
                     <Row>
-                        {savedRoutes.map((savedRoute) => (
-                            <PossibleRouteCard route={savedRoute.route} onRouteChosen={onRouteChosen} />
+                        {savedRoutes.map((savedRoute, index) => (
+                            <PossibleRouteCard key={index} route={savedRoute.route} onRouteChosen={onRouteChosen} />
                         ))}
                     </Row>
                 </Container>
