@@ -218,6 +218,20 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                                 </Button>
                             </Col>
                         </Row>
+
+                        {props.selectedRoute.steps.map((step) => {
+                            return (
+                                <Row>
+                                    <Col>
+                                        <p>
+                                            <strong>{step.title}</strong>
+                                        </p>
+
+                                        <p>{step.summary}</p>
+                                    </Col>
+                                </Row>
+                            );
+                        })}
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

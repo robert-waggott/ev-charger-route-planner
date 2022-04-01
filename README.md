@@ -52,9 +52,10 @@ MAPBOXAPIKEY=pk.eyJ1...
 
 ## In progress
 
+-   [ ] Display instructions
+
 ## Todo
 
--   [ ] Map incidents
 -   [ ] Reduce web gl craziness in the settings screen
 -   [ ] Show range polygons around ev charging points
 -   [ ] Display instructions

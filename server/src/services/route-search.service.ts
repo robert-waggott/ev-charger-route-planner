@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import axios from "axios";
-import { LatLng } from "src/dtos/lat-lng.dto";
+
 import { RouteSearchRequestDto } from "src/dtos/route-search-request.dto";
 import { DrivingRouteResponse } from "src/interfaces/driving-route-response.interface";
-import { LocationSearchResponse } from "src/interfaces/location-search-response.interface";
 
 @Injectable()
 export class RouteSearchService {
@@ -27,9 +26,9 @@ export class RouteSearchService {
         const profile = routeSearchRequest.includeTraffic ? "mapbox/driving-traffic" : "mapbox/driving";
         const url = `https://api.mapbox.com/directions/v5/${profile}/${routeSearchRequest.fromLatLng.lng},${routeSearchRequest.fromLatLng.lat};${routeSearchRequest.toLatLng.lng},${routeSearchRequest.toLatLng.lat}?${query}`;
 
-        const response = await axios.get(url);
+        console.log(url);
 
-        const firstRoute = response.data.routes[0];
+        const response = await axios.get(url);
 
         return response.data.routes.map((route) => {
             return {
@@ -39,56 +38,21 @@ export class RouteSearchService {
                 numberOfSteps: route.legs.length,
                 distanceInMeters: route.distance,
                 distanceInKm: route.distance / 1000,
-                distanceInMiles: route.distance * 0.000621371
+                distanceInMiles: route.distance * 0.000621371,
+                steps: route.legs[0].steps.map((step) => ({
+                    title: step.name,
+                    summary: step.maneuver.instruction,
+                    location: {
+                        lat: step.maneuver.location[1],
+                        lng: step.maneuver.location[0]
+                    },
+                    geometry: step.geometry,
+                    durationInMinutes: step.duration / 60,
+                    distanceInKm: step.distance / 1000,
+                    distanceInMiles: step.distance * 0.000621371
+                }))
             };
         });
-
-        /* 
-{
-  weight_typical: 13944.985,
-  duration_typical: 14675.718,
-  weight_name: 'auto',
-  weight: 14034.234,
-  duration: 14788.699,
-  distance: 346215.594,
-  legs: [
-    {
-      via_waypoints: [],
-      admins: [Array],
-      incidents: [Array],
-      annotation: [Object],
-      weight_typical: 13944.985,
-      duration_typical: 14675.718,
-      weight: 14034.234,
-      duration: 14788.699,
-      steps: [Array],
-      distance: 346215.594,
-      summary: 'M1, M5'
-    }
-  ],
-  geometry: {
-    coordinates: [
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array], [Array], [Array], [Array], [Array], [Array],
-      [Array], [Array],
-      ... 4864 more items
-    ],
-    type: 'LineString'
-  }
-}        
-        */
     }
 
     getExclusionList(routeSearchRequest: RouteSearchRequestDto) {

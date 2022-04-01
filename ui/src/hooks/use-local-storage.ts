@@ -3,7 +3,7 @@ import React from "react";
 export function getLocalStorageValue<T>(key: string, defaultValue: T) {
     const saved = localStorage.getItem(key);
 
-    if (!saved) {
+    if (!saved || saved === "undefined") {
         return defaultValue;
     }
 
