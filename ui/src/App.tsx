@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 
 import { FullScreenMap } from "./components/full-screen-map";
 import { SearchSidebar } from "./components/search-sidebar/search-sidebar";
-import { Route } from "./interfaces/route";
+import { Route, Step } from "./interfaces/route";
 import { Config } from "./classes/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";
 import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-sidebar";
@@ -12,9 +12,9 @@ import { AvailableRoutesModal } from "./components/available-routes";
 import { PossibleRoutes } from "./interfaces/possible-routes";
 import { RouteDetailsSidebar } from "./components/route-sidebar/route-details-sidebar";
 import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
+import { SettingsCog } from "./components/settings";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { SettingsCog } from "./components/settings";
 
 export type ConfigContextDefaultValue = {
     config: Config | null;
@@ -29,6 +29,7 @@ export const ConfigContext = React.createContext<ConfigContextDefaultValue>({
 function App() {
     const [config, setConfig] = React.useState<Config | null>(null);
     const [selectedRoute, setSelectedRoute] = React.useState<Route | null>(null);
+    const [selectedStep, setSelectedStep] = React.useState<Step | null>(null);
     const [possibleRoutes, setPossibleRoutes] = React.useState<PossibleRoutes | null>(null);
     const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
@@ -51,8 +52,12 @@ function App() {
                     selectedRoute={selectedRoute}
                     onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)}
                 />
-                <RouteDetailsSidebar selectedRoute={selectedRoute} />
-                <FullScreenMap route={selectedRoute} onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)} />
+                <RouteDetailsSidebar selectedRoute={selectedRoute} onNavigateToStep={(step) => setSelectedStep(step)} />
+                <FullScreenMap
+                    route={selectedRoute}
+                    step={selectedStep}
+                    onChargeDeviceChanged={(cd) => setSelectedChargeDevice(cd)}
+                />
                 <SettingsCog />
                 <ChargeDeviceDetailsSidebar chargeDevice={selectedChargeDevice} />
                 <AvailableRoutesModal

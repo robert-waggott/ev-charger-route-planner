@@ -4,11 +4,12 @@ import styled from "styled-components";
 
 import { ConfigContext } from "../App";
 import { ChargeDevice } from "../interfaces/charge-points-response";
-import { Route } from "../interfaces/route";
+import { Route, Step } from "../interfaces/route";
 import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {
     route: Route | null;
+    step: Step | null;
     onChargeDeviceChanged: (chargeDevice: ChargeDevice | null) => unknown;
 }
 
@@ -60,6 +61,15 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
             }
         }
     }, [config]);
+
+    React.useEffect(() => {
+        if (props.step && mapRef.current) {
+            mapRef.current.flyTo({
+                center: [props.step.location.lng, props.step.location.lat],
+                zoom: 12
+            });
+        }
+    }, [props.step]);
 
     return (
         <MapContainerDiv ref={mapContainerRef} id="map">

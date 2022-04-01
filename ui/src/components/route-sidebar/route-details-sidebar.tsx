@@ -4,7 +4,7 @@ import { FaChevronRight, FaRegSave } from "react-icons/fa";
 import { Offcanvas, Col, Container, Row, Accordion } from "react-bootstrap";
 import moment from "moment";
 
-import { Route } from "../../interfaces/route";
+import { Route, Step } from "../../interfaces/route";
 import { SavedRoute } from "../../interfaces/saved-route";
 import { DurationBadge, RouteDistanceBadge } from "../route-card/badges";
 import { SaveRouteModal } from "./save-route-modal";
@@ -12,6 +12,7 @@ import { AccordionItem } from "./accordion-item";
 
 interface RouteDetailsProps {
     selectedRoute: Route | null;
+    onNavigateToStep: (step: Step) => unknown;
 }
 
 const StyledExpandButton = styled.button`
@@ -97,7 +98,13 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                     <Container fluid className="g-0">
                         <Accordion defaultActiveKey="0">
                             {props.selectedRoute.steps.map((step, index) => {
-                                return <AccordionItem index={index} step={step} />;
+                                return (
+                                    <AccordionItem
+                                        index={index}
+                                        step={step}
+                                        onNavigateToStep={props.onNavigateToStep}
+                                    />
+                                );
                             })}
                         </Accordion>
                     </Container>

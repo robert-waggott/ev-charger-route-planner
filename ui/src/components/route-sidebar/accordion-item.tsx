@@ -7,6 +7,7 @@ import { Step } from "../../interfaces/route";
 interface AccordionItemProps {
     index: number;
     step: Step;
+    onNavigateToStep: (step: Step) => unknown;
 }
 
 const StyledNavigateToButton = styled.button`
@@ -41,7 +42,7 @@ export const AccordionItem = (props: AccordionItemProps) => {
                     <Row>
                         <Col sm={10}>{props.step.summary}</Col>
                         <Col sm={2}>
-                            <StyledNavigateToButton>
+                            <StyledNavigateToButton onClick={() => props.onNavigateToStep(props.step)}>
                                 <FaDirections />
                             </StyledNavigateToButton>
                         </Col>
