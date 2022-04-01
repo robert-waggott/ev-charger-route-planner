@@ -5,7 +5,7 @@ import { useLocalStorage } from "../hooks/use-local-storage";
 import { Route } from "../interfaces/route";
 import { savedRoutesKey } from "../constants";
 import { SavedRoute } from "../interfaces/saved-route";
-import { PossibleRouteCard } from "./possible-route-card";
+import { PossibleRouteCard } from "./route-card/possible-route-card";
 
 interface OpenSavedRouteModalProps {
     onRouteChosen: (route: Route) => unknown;

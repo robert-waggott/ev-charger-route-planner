@@ -1,19 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { FaChevronRight } from "react-icons/fa";
-import { Offcanvas, Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Modal, Form, Table } from "react-bootstrap";
 import { Formik, FormikHelpers } from "formik";
 import toast from "react-hot-toast";
 import moment from "moment";
 
-import { Route } from "../interfaces/route";
-import { SavedRoutesReducer } from "./saved-routes-reducer";
-import { getLocalStorageValue, setLocalStorageValue } from "../hooks/use-local-storage";
-import { SavedRoute } from "../interfaces/saved-route";
-import { ErrorContainer } from "./error-container";
-import { savedRoutesKey } from "../constants";
+import { SavedRoutesReducer } from "../saved-routes-reducer";
+import { getLocalStorageValue, setLocalStorageValue } from "../../hooks/use-local-storage";
+import { SavedRoute } from "../../interfaces/saved-route";
+import { ErrorContainer } from "../error-container";
+import { savedRoutesKey } from "../../constants";
 
-interface SavedRouteModalProps {
+interface SaveRouteModalProps {
     savedRoute: SavedRoute | null;
 }
 
@@ -21,7 +19,7 @@ const StyledSaveButtonContainer = styled(Col)`
     text-align: right;
 `;
 
-const SavedRouteModal = (props: SavedRouteModalProps) => {
+export const SaveRouteModal = (props: SaveRouteModalProps) => {
     const [savedRoutes, dispatchSavedRoutes] = React.useReducer(
         SavedRoutesReducer,
         getLocalStorageValue<SavedRoute[] | null>(savedRoutesKey, null)
@@ -157,86 +155,5 @@ const SavedRouteModal = (props: SavedRouteModalProps) => {
                 </Button>
             </Modal.Footer>
         </Modal>
-    );
-};
-
-interface RouteDetailsProps {
-    selectedRoute: Route | null;
-}
-
-const StyledExpandButton = styled.button`
-    border: none;
-    z-index: 999;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    height: 42px;
-    width: 42px;
-    font-size: 19px;
-    background: none;
-    cursor: pointer;
-`;
-
-export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
-    const [expanded, setExpanded] = React.useState<boolean>(true);
-    const [savedRoute, setSavedRoute] = React.useState<SavedRoute | null>(null);
-
-    if (!props.selectedRoute) {
-        return <></>;
-    }
-
-    const saveRoute = () => {
-        setSavedRoute({
-            name: props.selectedRoute!.summary,
-            savedOn: moment(),
-            route: props.selectedRoute!
-        });
-    };
-
-    return (
-        <>
-            <StyledExpandButton onClick={() => setExpanded(true)} title="Expand the route details">
-                <FaChevronRight />
-            </StyledExpandButton>
-
-            <Offcanvas
-                show={expanded}
-                placement="start"
-                scroll={true}
-                backdrop={false}
-                onHide={() => setExpanded(false)}
-            >
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{props.selectedRoute.summary}</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                    <Container fluid className="g-0">
-                        <Row className="g-0">
-                            <Col>
-                                <Button variant="secondary" onClick={saveRoute}>
-                                    Save this Route
-                                </Button>
-                            </Col>
-                        </Row>
-
-                        {props.selectedRoute.steps.map((step) => {
-                            return (
-                                <Row>
-                                    <Col>
-                                        <p>
-                                            <strong>{step.title}</strong>
-                                        </p>
-
-                                        <p>{step.summary}</p>
-                                    </Col>
-                                </Row>
-                            );
-                        })}
-                    </Container>
-                </Offcanvas.Body>
-            </Offcanvas>
-
-            <SavedRouteModal savedRoute={savedRoute} />
-        </>
     );
 };

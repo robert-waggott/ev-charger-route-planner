@@ -10,7 +10,7 @@ import { ChargeDeviceDetailsSidebar } from "./components/charge-device-details-s
 import { ConfigService } from "./services/config-service";
 import { AvailableRoutesModal } from "./components/available-routes";
 import { PossibleRoutes } from "./interfaces/possible-routes";
-import { RouteDetailsSidebar } from "./components/route-details-sidebar";
+import { RouteDetailsSidebar } from "./components/route-sidebar/route-details-sidebar";
 import { OpenSavedRouteModal } from "./components/open-saved-route-modal";
 
 import "bootstrap/dist/css/bootstrap.min.css";

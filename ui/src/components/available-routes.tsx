@@ -3,7 +3,7 @@ import { Container, Modal, Row } from "react-bootstrap";
 
 import { Route } from "../interfaces/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
-import { PossibleRouteCard } from "./possible-route-card";
+import { PossibleRouteCard } from "./route-card/possible-route-card";
 
 interface PossibleRoutesModalProps {
     possibleRoutes: PossibleRoutes | null;
