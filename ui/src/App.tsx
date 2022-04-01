@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { Toaster } from "react-hot-toast";
 
-import { FullScreenMap } from "./components/full-screen-map";
+import { FullScreenMap } from "./components/maps/full-screen-map";
 import { SearchSidebar } from "./components/search-sidebar/search-sidebar";
 import { Route, Step } from "./interfaces/route";
 import { Config } from "./classes/config";

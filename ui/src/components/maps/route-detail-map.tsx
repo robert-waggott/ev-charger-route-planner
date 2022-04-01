@@ -2,9 +2,9 @@ import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 
-import { ConfigContext } from "../App";
-import { Route } from "../interfaces/route";
-import { RouteBuildingService } from "../services/route-building-service";
+import { ConfigContext } from "../../App";
+import { Route } from "../../interfaces/route";
+import { RouteBuildingService } from "../../services/route-building-service";
 
 interface RouteDetailMapProps {
     route: Route;

@@ -1,7 +1,7 @@
 import { Card, Col } from "react-bootstrap";
 
 import { Route } from "../../interfaces/route";
-import { RouteDetailMap } from "../route-detail-map";
+import { RouteDetailMap } from "../maps/route-detail-map";
 import { DurationBadge, RouteDistanceBadge } from "./badges";
 
 interface PossibleRouteProps {

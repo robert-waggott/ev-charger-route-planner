@@ -2,20 +2,13 @@ import maplibregl from "maplibre-gl";
 import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 
-import { ConfigContext } from "../App";
-import { ChargeDevice } from "../interfaces/charge-points-response";
-import { Route, Step } from "../interfaces/route";
-import { RouteBuildingService } from "../services/route-building-service";
+import { ConfigContext } from "../../App";
+import { ChargeDevice } from "../../interfaces/charge-points-response";
+import { Route, Step } from "../../interfaces/route";
 
-export interface FullScreenMapProps {
+interface FullScreenMapProps {
     route: Route | null;
     step: Step | null;
-    onChargeDeviceChanged: (chargeDevice: ChargeDevice | null) => unknown;
-}
-
-export interface MappedRouteProps {
-    map: maplibregl.Map;
-    route: Route | null;
     onChargeDeviceChanged: (chargeDevice: ChargeDevice | null) => unknown;
 }
 
@@ -25,22 +18,6 @@ const MapContainerDiv = styled.div`
     bottom: 0;
     width: 100%;
 `;
-
-export const MappedRoute = ({ route, map, onChargeDeviceChanged }: MappedRouteProps) => {
-    React.useEffect(() => {
-        const mapRoute = async () => {
-            if (route) {
-                await new RouteBuildingService(route, map, (chargeDevice) => {
-                    onChargeDeviceChanged(chargeDevice);
-                }).mapRoute();
-            }
-        };
-
-        mapRoute();
-    }, [route, map, onChargeDeviceChanged]);
-
-    return <></>;
-};
 
 export const FullScreenMap = (props: FullScreenMapProps) => {
     const { config } = React.useContext(ConfigContext);
@@ -71,6 +48,7 @@ export const FullScreenMap = (props: FullScreenMapProps) => {
         }
     }, [props.step]);
 
+    // todo: use forwardRef and move mappedRoute into App to stop it from being re-built when the selected step is changed.
     return (
         <MapContainerDiv ref={mapContainerRef} id="map">
             <MappedRoute map={mapRef.current} route={props.route} onChargeDeviceChanged={props.onChargeDeviceChanged} />
