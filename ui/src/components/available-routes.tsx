@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Modal, Row } from "react-bootstrap";
 
-import { Route } from "../interfaces/route";
+import { Route } from "../classes/route";
 import { PossibleRoutes } from "../interfaces/possible-routes";
 import { PossibleRouteCard } from "./route-card/possible-route-card";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, Modal, Row } from "react-bootstrap";
 
 import { useLocalStorage } from "../hooks/use-local-storage";
-import { Route } from "../interfaces/route";
+import { Route } from "../classes/route";
 import { savedRoutesKey } from "../constants";
 import { SavedRoute } from "../interfaces/saved-route";
 import { PossibleRouteCard } from "./route-card/possible-route-card";

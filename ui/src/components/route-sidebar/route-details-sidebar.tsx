@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { FaChevronRight, FaRegSave } from "react-icons/fa";
-import { Offcanvas, Col, Container, Row } from "react-bootstrap";
+import { Offcanvas, Col, Container, Row, Accordion } from "react-bootstrap";
 import moment from "moment";
 
-import { Route } from "../../interfaces/route";
+import { Route } from "../../classes/route";
 import { SavedRoute } from "../../interfaces/saved-route";
 import { DurationBadge, RouteDistanceBadge } from "../route-card/badges";
 import { SaveRouteModal } from "./save-route-modal";
@@ -94,19 +94,16 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Container fluid className="g-0">
-                        {props.selectedRoute.steps.map((step) => {
-                            return (
-                                <Row>
-                                    <Col>
-                                        <p>
-                                            <strong>{step.title}</strong>
-                                        </p>
-
-                                        <p>{step.summary}</p>
-                                    </Col>
-                                </Row>
-                            );
-                        })}
+                        <Accordion defaultActiveKey="0">
+                            {props.selectedRoute.steps.map((step, index) => {
+                                return (
+                                    <Accordion.Item eventKey={index.toString()}>
+                                        <Accordion.Header>{step.name}</Accordion.Header>
+                                        <Accordion.Body>{step.summary}</Accordion.Body>
+                                    </Accordion.Item>
+                                );
+                            })}
+                        </Accordion>
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

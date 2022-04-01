@@ -3,7 +3,7 @@ import React, { MutableRefObject } from "react";
 import styled from "styled-components";
 
 import { ConfigContext } from "../App";
-import { Route } from "../interfaces/route";
+import { Route } from "../classes/route";
 import { RouteBuildingService } from "../services/route-building-service";
 
 interface RouteDetailMapProps {

@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { Route } from "./route";
+import { Route } from "../classes/route";
 
 export interface SavedRoute {
     name: string;
