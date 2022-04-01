@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Toaster } from "react-hot-toast";
 
 import { FullScreenMap } from "./components/full-screen-map";
-import { SearchSidebar } from "./components/search-sidebar";
+import { SearchSidebar } from "./components/search-sidebar/search-sidebar";
 import { Route } from "./classes/route";
 import { Config } from "./classes/config";
 import { ChargeDevice } from "./interfaces/charge-points-response";

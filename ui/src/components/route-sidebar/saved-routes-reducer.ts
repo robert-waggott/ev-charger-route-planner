@@ -1,4 +1,4 @@
-import { SavedRoute } from "./../interfaces/saved-route";
+import { SavedRoute } from "../../interfaces/saved-route";
 
 export const SavedRoutesReducer = (state: SavedRoute[] | null, action: SavedRoutesReducerAction) => {
     switch (action.type) {

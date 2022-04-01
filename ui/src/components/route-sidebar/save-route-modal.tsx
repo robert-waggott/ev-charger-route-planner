@@ -5,7 +5,7 @@ import { Formik, FormikHelpers } from "formik";
 import toast from "react-hot-toast";
 import moment from "moment";
 
-import { SavedRoutesReducer } from "../saved-routes-reducer";
+import { SavedRoutesReducer } from "./saved-routes-reducer";
 import { getLocalStorageValue, setLocalStorageValue } from "../../hooks/use-local-storage";
 import { SavedRoute } from "../../interfaces/saved-route";
 import { ErrorContainer } from "../error-container";

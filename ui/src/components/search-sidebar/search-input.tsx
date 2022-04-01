@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { AsyncTypeahead, Menu, MenuItem } from "react-bootstrap-typeahead";
-import { LocationSearchService } from "../services/location-search-service";
-import { LocationSearchResult, NullableLocationSearchResult } from "../interfaces/search-result";
+import { LocationSearchService } from "../../services/location-search-service";
+import { LocationSearchResult, NullableLocationSearchResult } from "../../interfaces/search-result";
 import { Button, InputGroup, OverlayTrigger, Popover } from "react-bootstrap";
 import { FaInfoCircle } from "react-icons/fa";
 import "react-bootstrap-typeahead/css/Typeahead.css";
