@@ -4,10 +4,11 @@ import { FaChevronRight, FaRegSave } from "react-icons/fa";
 import { Offcanvas, Col, Container, Row, Accordion } from "react-bootstrap";
 import moment from "moment";
 
-import { Route } from "../../classes/route";
+import { Route } from "../../interfaces/route";
 import { SavedRoute } from "../../interfaces/saved-route";
 import { DurationBadge, RouteDistanceBadge } from "../route-card/badges";
 import { SaveRouteModal } from "./save-route-modal";
+import { AccordionItem } from "./accordion-item";
 
 interface RouteDetailsProps {
     selectedRoute: Route | null;
@@ -96,12 +97,7 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                     <Container fluid className="g-0">
                         <Accordion defaultActiveKey="0">
                             {props.selectedRoute.steps.map((step, index) => {
-                                return (
-                                    <Accordion.Item eventKey={index.toString()}>
-                                        <Accordion.Header>{step.name}</Accordion.Header>
-                                        <Accordion.Body>{step.summary}</Accordion.Body>
-                                    </Accordion.Item>
-                                );
+                                return <AccordionItem index={index} step={step} />;
                             })}
                         </Accordion>
                     </Container>

@@ -2,7 +2,7 @@ import { Badge } from "react-bootstrap";
 import styled from "styled-components";
 import moment from "moment";
 
-import { Route } from "../../classes/route";
+import { Route } from "../../interfaces/route";
 
 const StyledBadge = styled(Badge)`
     margin-right: 10px;

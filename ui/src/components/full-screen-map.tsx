@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { ConfigContext } from "../App";
 import { ChargeDevice } from "../interfaces/charge-points-response";
-import { Route } from "../classes/route";
+import { Route } from "../interfaces/route";
 import { RouteBuildingService } from "../services/route-building-service";
 
 export interface FullScreenMapProps {

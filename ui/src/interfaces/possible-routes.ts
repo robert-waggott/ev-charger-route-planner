@@ -1,4 +1,4 @@
-import { Route } from "../classes/route";
+import { Route } from "./route";
 
 export interface PossibleRoutes {
     routes: Route[] | null;

@@ -1,5 +1,5 @@
 import { LngLatBounds, LngLatLike, Map, MapLayerMouseEvent } from "maplibre-gl";
-import { Route } from "../classes/route";
+import { Route } from "../interfaces/route";
 import { Feature, Point, Position } from "geojson";
 import { ChargingPointsService } from "./charging-points-service";
 import { ChargeDevice } from "../interfaces/charge-points-response";

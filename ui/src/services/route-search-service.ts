@@ -1,6 +1,4 @@
-import { plainToInstance } from "class-transformer";
-
-import { Route } from "../classes/route";
+import { Route } from "../interfaces/route";
 import { RouteSearch } from "../interfaces/route-search";
 import { BaseService } from "./base-service";
 
@@ -12,8 +10,6 @@ export class RouteSearchService extends BaseService {
             ...routeSearchParams
         };
 
-        const response = (await this.post("/RouteSearch", request)) as any[];
-
-        return plainToInstance(Route, response);
+        return (await this.post("/RouteSearch", request)) as Route[];
     }
 }

@@ -5,7 +5,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Container } from "react-bootstrap";
 
 import { RouteSearchForm } from "./route-search-form";
-import { Route } from "../../classes/route";
+import { Route } from "../../interfaces/route";
 import { PossibleRoutes } from "../../interfaces/possible-routes";
 
 interface SearchSidebarProps {

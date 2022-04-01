@@ -1,6 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 
-import { Route } from "../../classes/route";
+import { Route } from "../../interfaces/route";
 import { RouteDetailMap } from "../route-detail-map";
 import { DurationBadge, RouteDistanceBadge } from "./badges";
 
