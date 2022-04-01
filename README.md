@@ -48,14 +48,14 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Refactor maptiler url so it's shared across components
 -   [x] Extend startup tasks to run `npm test`
 -   [x] Refactor tests to use nock
+-   [x] Ability to change map tiles
 
 ## In progress
-
--   [ ] Ability to change map tiles
 
 ## Todo
 
 -   [ ] Map incidents
+-   [ ] Reduce web gl craziness in the settings screen
 -   [ ] Show range polygons around ev charging points
 -   [ ] Display instructions
 -   [ ] Print instructions
