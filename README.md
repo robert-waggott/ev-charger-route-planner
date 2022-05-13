@@ -63,6 +63,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Create/implement the EV algorithm
 -   [ ] Change route styling and add option in UI to change it
 -   [ ] Change UX of how a search can be run
+-   [ ] Error banner
 
 ## Nice to have
 
