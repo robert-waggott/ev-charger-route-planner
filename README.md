@@ -64,6 +64,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Change route styling and add option in UI to change it
 -   [ ] Change UX of how a search can be run
 -   [ ] Error banner
+-   [ ] Suspense 
 
 ## Nice to have
 
