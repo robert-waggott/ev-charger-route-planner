@@ -63,6 +63,11 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Create/implement the EV algorithm
 -   [ ] Change route styling and add option in UI to change it
 -   [ ] Change UX of how a search can be run
+-   [ ] Error banner - using a global scope/store
+-   [ ] Feedback form  
+-   [ ] Add a missing EV charger form  
+-   [ ] Use Yup validation schema for route search form  
+-   [ ] Test accessibility and create additional Todo items   
 
 ## Nice to have
 
