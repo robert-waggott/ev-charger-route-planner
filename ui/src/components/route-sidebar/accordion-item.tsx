@@ -4,7 +4,7 @@ import { FaDirections } from "react-icons/fa";
 
 import { Step } from "../../interfaces/route";
 
-interface AccordionItemProps {
+export interface AccordionItemProps {
     index: number;
     step: Step;
     onNavigateToStep: (step: Step) => unknown;
