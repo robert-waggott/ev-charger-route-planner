@@ -58,6 +58,7 @@
         "@types/geojson": "^7946.0.8",
         "@types/react-bootstrap-typeahead": "^5.1.7",
         "@types/styled-components": "^5.1.11",
+        "faker": "^6.6.6",
         "nock": "^13.2.4"
     },
     "jest": {
