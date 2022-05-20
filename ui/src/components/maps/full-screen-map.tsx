@@ -1,10 +1,11 @@
 import maplibregl from "maplibre-gl";
-import React, { MutableRefObject } from "react";
+import React, { ForwardedRef, MutableRefObject } from "react";
 import styled from "styled-components";
 
 import { ConfigContext } from "../../App";
 import { ChargeDevice } from "../../interfaces/charge-points-response";
 import { Route, Step } from "../../interfaces/route";
+import { MappedRoute } from "./mapped-route";
 
 interface FullScreenMapProps {
     route: Route | null;
