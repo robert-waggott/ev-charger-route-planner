@@ -125,7 +125,7 @@ export const SaveRouteModal = (props: SaveRouteModalProps) => {
                             <tbody>
                                 {savedRoutes.map((route, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{route.name}</td>
                                             <td>{moment(route.savedOn).format("dddd Do MMM YYYY HH:mm")}</td>

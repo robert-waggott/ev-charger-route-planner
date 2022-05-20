@@ -100,6 +100,7 @@ export const RouteDetailsSidebar = (props: RouteDetailsProps) => {
                             {props.selectedRoute.steps.map((step, index) => {
                                 return (
                                     <AccordionItem
+                                        key={index}
                                         index={index}
                                         step={step}
                                         onNavigateToStep={props.onNavigateToStep}
