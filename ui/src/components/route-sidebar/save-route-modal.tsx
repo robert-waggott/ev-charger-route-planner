@@ -130,7 +130,7 @@ export interface SavedRoutesTableProps {
 }
 
 export const SavedRoutesTable = (props: SavedRoutesTableProps) => {
-    if (!props.savedRoutes) {
+    if (!props.savedRoutes || props.savedRoutes.length === 0) {
         return <></>;
     }
 
