@@ -49,25 +49,25 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [x] Extend startup tasks to run `npm test`
 -   [x] Refactor tests to use nock
 -   [x] Ability to change map tiles
+-   [x] Change UX of how a search can be run
+-   [x] Display instructions
 
 ## In progress
 
--   [ ] Display instructions
+-   [ ] Zoom to step from within the instructions
+-   [ ] Use Yup validation schema for route search form
 
 ## Todo
 
 -   [ ] Reduce web gl craziness in the settings screen
 -   [ ] Show range polygons around ev charging points
--   [ ] Display instructions
 -   [ ] Print instructions
 -   [ ] Create/implement the EV algorithm
 -   [ ] Change route styling and add option in UI to change it
--   [ ] Change UX of how a search can be run
 -   [ ] Error banner - using a global scope/store
--   [ ] Feedback form  
--   [ ] Add a missing EV charger form  
--   [ ] Use Yup validation schema for route search form  
--   [ ] Test accessibility and create additional Todo items   
+-   [ ] Feedback form
+-   [ ] Add a missing EV charger form
+-   [ ] Test accessibility and create additional Todo items
 
 ## Nice to have
 
