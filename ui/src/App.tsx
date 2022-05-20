@@ -34,7 +34,7 @@ function App() {
     const [selectedChargeDevice, setSelectedChargeDevice] = React.useState<ChargeDevice | null>(null);
 
     async function getConfig() {
-        const config = await new ConfigService().getConfig(); // todo: make this a constant or app context so can be used in sidebar map too
+        const config = await new ConfigService().getConfig();
 
         setConfig(config);
     }
