@@ -112,41 +112,7 @@ export const SaveRouteModal = (props: SaveRouteModalProps) => {
                         </Col>
                     </Row>
 
-                    {savedRoutes ? (
-                        <Table striped bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Saved On</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {savedRoutes.map((route, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{route.name}</td>
-                                            <td>{moment(route.savedOn).format("dddd Do MMM YYYY HH:mm")}</td>
-                                            <td>
-                                                <Button
-                                                    size="sm"
-                                                    variant="secondary"
-                                                    type="button"
-                                                    onClick={() => onReplaceRoute(index)}
-                                                >
-                                                    Replace
-                                                </Button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </Table>
-                    ) : (
-                        <></>
-                    )}
+                    <SavedRoutesTable savedRoutes={savedRoutes} onReplaceRoute={onReplaceRoute} />
                 </Container>
             </Modal.Body>
             <Modal.Footer>
@@ -155,5 +121,50 @@ export const SaveRouteModal = (props: SaveRouteModalProps) => {
                 </Button>
             </Modal.Footer>
         </Modal>
+    );
+};
+
+export interface SavedRoutesTableProps {
+    savedRoutes: SavedRoute[] | null;
+    onReplaceRoute: (index: number) => unknown;
+}
+
+export const SavedRoutesTable = (props: SavedRoutesTableProps) => {
+    if (!props.savedRoutes) {
+        return <></>;
+    }
+
+    return (
+        <Table striped bordered hover size="sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Saved On</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.savedRoutes.map((route, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{route.name}</td>
+                            <td>{moment(route.savedOn).format("dddd Do MMM YYYY HH:mm")}</td>
+                            <td>
+                                <Button
+                                    size="sm"
+                                    variant="secondary"
+                                    type="button"
+                                    onClick={() => props.onReplaceRoute(index)}
+                                >
+                                    Replace
+                                </Button>
+                            </td>
+                        </tr>
+                    );
+                })}
+            </tbody>
+        </Table>
     );
 };
