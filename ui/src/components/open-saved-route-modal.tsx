@@ -8,12 +8,14 @@ import { savedRoutesKey } from "../constants";
 import { SavedRoute } from "../interfaces/saved-route";
 import { PossibleRouteCard } from "./route-card/possible-route-card";
 import { RouteSearchForm } from "./search-sidebar/route-search-form";
+import { PossibleRoutes } from "../interfaces/possible-routes";
 
 interface OpenSavedRouteModalProps {
     onRouteChosen: (route: Route) => unknown;
+    onSearchSubmitted: (possibleRoutes: PossibleRoutes) => unknown;
 }
 
-const MapANewRouteHeader = styled.h4`
+const MapANewRouteHeader = styled.h5`
     margin-top: 20px;
     padding-top: 5px;
     border-top: 1px solid #dee2e6;
@@ -26,6 +28,11 @@ export const OpenSavedRouteModal = (props: OpenSavedRouteModalProps) => {
     const onRouteChosen = (route: Route) => {
         setShow(false);
         props.onRouteChosen(route);
+    };
+
+    const onSearchSubmitted = (possibleRoutes: PossibleRoutes) => {
+        setShow(false);
+        props.onSearchSubmitted(possibleRoutes);
     };
 
     return (
@@ -53,7 +60,7 @@ export const OpenSavedRouteModal = (props: OpenSavedRouteModalProps) => {
                         </Col>
                     </Row>
 
-                    <RouteSearchForm onSearchSubmitted={() => {}} />
+                    <RouteSearchForm onSearchSubmitted={onSearchSubmitted} />
                 </Container>
             </Modal.Body>
             <Modal.Footer>

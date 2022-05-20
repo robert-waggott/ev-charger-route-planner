@@ -35,8 +35,8 @@ export const AvailableRoutesModal = (props: PossibleRoutesModalProps) => {
                 <Container fluid>
                     <Row>
                         {props.possibleRoutes && props.possibleRoutes.routes ? (
-                            props.possibleRoutes.routes.map((route) => (
-                                <PossibleRouteCard route={route} onRouteChosen={onChooseRoute} />
+                            props.possibleRoutes.routes.map((route, index) => (
+                                <PossibleRouteCard key={index} route={route} onRouteChosen={onChooseRoute} />
                             ))
                         ) : (
                             <></>

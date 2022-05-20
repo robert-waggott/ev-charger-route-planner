@@ -87,7 +87,7 @@ export const SettingsCog = () => {
                     <Container fluid className="g-0">
                         <Row>
                             {options.map((option, index) => (
-                                <Col sm={4}>
+                                <Col key={index} sm={4}>
                                     <StyledCard>
                                         <Card.Header>{option}</Card.Header>
                                         <Card.Body>

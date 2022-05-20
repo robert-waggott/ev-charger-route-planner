@@ -64,7 +64,10 @@ function App() {
                     possibleRoutes={possibleRoutes}
                     onRouteChosen={(route) => setSelectedRoute(route)}
                 />
-                <OpenSavedRouteModal onRouteChosen={(route) => setSelectedRoute(route)} />
+                <OpenSavedRouteModal
+                    onRouteChosen={(route) => setSelectedRoute(route)}
+                    onSearchSubmitted={(possibleRoutes) => setPossibleRoutes(possibleRoutes)}
+                />
             </ConfigContext.Provider>
         </div>
     );
