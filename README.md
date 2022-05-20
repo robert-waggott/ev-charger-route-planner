@@ -55,7 +55,6 @@ MAPBOXAPIKEY=pk.eyJ1...
 ## In progress
 
 -   [ ] Zoom to step from within the instructions
--   [ ] Use Yup validation schema for route search form
 
 ## Todo
 
