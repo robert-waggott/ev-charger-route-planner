@@ -67,6 +67,7 @@ MAPBOXAPIKEY=pk.eyJ1...
 -   [ ] Feedback form
 -   [ ] Add a missing EV charger form
 -   [ ] Test accessibility and create additional Todo items
+-   [ ] Update maplibre
 
 ## Nice to have
 
